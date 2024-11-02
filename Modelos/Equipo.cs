@@ -29,13 +29,13 @@ namespace Modelos
         [Required]
         public string EstadoEquipo { get; set; }
 
-        public bool Estado {  get; set; }
-
         [ForeignKey("IdCategoriaEquipo")]
 
         public int IdCategoriaEquipo { get; set; }
 
-        
+        //public virtual CategoriaEquipo? CategoriaEquipo { get; set; }
+
+        public bool Estado { get; set; }
 
     }
 }
