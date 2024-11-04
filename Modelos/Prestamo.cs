@@ -5,7 +5,8 @@ namespace Modelos
 {
     public class Prestamo
     {
-        [Key] public int Id { get; set; }
+        [Key] 
+        public int Id { get; set; }
 
         [ForeignKey("IdEquipo")]
         public int IdEquipo { get; set; }
@@ -17,7 +18,5 @@ namespace Modelos
 
         public virtual PerfilTecnico? PerfilTecnico { get; set; }
 
-        [ForeignKey("IdPrestatario")]
-        p
     }
 }
