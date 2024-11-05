@@ -4,9 +4,9 @@ using Modelos;
 
 namespace Datos
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opciones) : base(opciones)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             
         }
@@ -15,8 +15,7 @@ namespace Datos
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Especialidad> Especialidades { get; set; }
         public DbSet<Seccion> Secciones { get; set; }
-        public DbSet<Usuario>Usuario { get; set; }
-        public DbSet<Especialidad> Especialidad { get; set; }
-        public DbSet<CategoriaEquipo> CategoriaEquipo { get; set; }
+        public DbSet<CategoriaEquipo> CategoriasEquipos { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
     }
 }
