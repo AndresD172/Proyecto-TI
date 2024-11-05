@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj" />
+    <ProjectReference Include="..\Modelos\Modelos.csproj" />
+    <ProjectReference Include="..\Utilidades\Utilidades.csproj" />
   </ItemGroup>
 
 </Project>
