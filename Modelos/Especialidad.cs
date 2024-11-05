@@ -10,13 +10,12 @@ namespace Modelos
     public class Especialidad
     {
         [Key]
-        public int id { get; set; }
+        public int IdEspecialidad { get; set; }
 
-        [Required]
-        public string descripcionEspecialidad { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public string NombreEspecialidad { get; set; }
 
-        [Required]
-        public bool estado { get; set; }
-
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public Boolean Estado { get; set; }
     }
 }
