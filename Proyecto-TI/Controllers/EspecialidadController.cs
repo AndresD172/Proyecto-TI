@@ -5,19 +5,19 @@ using System.Collections.Generic;
 
 namespace Proyecto_TI.Controllers
 {
-    public class DepartamentoController : Controller
+    public class EspecialidadController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public DepartamentoController(ApplicationDbContext db)
+        public EspecialidadController(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Departamento> lista = _db.Departamento;
-            return View();
+            IEnumerable<Especialidad> lista = _db.Especialidad;
+            return View(lista); 
         }
 
         public IActionResult Crear()
@@ -27,17 +27,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(Departamento departamento)
+        public IActionResult Crear(Especialidad especialidad)
         {
             if (ModelState.IsValid)
             {
-                _db.Departamento.Add(departamento);
+                _db.Especialidad.Add(especialidad);
                 _db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(departamento);
+            return View(especialidad);
         }
 
         public IActionResult Editar(int? id)
@@ -47,7 +47,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Departamento.Find(id);
+            var obj = _db.Especialidad.Find(id);
 
             if (obj == null) { return NotFound(); }
 
@@ -56,17 +56,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Editar(Departamento departamento)
+        public IActionResult Editar(Especialidad especialidad)
         {
             if (ModelState.IsValid)
             {
-                _db.Departamento.Update(departamento);
+                _db.Especialidad.Update(especialidad);
                 _db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(departamento);
+            return View(especialidad);
         }
 
         public IActionResult Eliminar(int? id)
@@ -76,7 +76,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Departamento.Find(id);
+            var obj = _db.Especialidad.Find(id);
 
             if (obj == null) { return NotFound(); }
 
@@ -85,21 +85,18 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public IActionResult Eliminar(Departamento departamento)
+        public IActionResult Eliminar(Especialidad especialidad)
         {
-
-            if (departamento == null)
+            if (especialidad == null)
             {
                 return NotFound();
             }
 
-            _db.Departamento.Remove(departamento);
+            _db.Especialidad.Remove(especialidad);
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }
+

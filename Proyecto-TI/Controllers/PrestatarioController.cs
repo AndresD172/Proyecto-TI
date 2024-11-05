@@ -5,19 +5,19 @@ using System.Collections.Generic;
 
 namespace Proyecto_TI.Controllers
 {
-    public class DepartamentoController : Controller
+    public class PrestatarioController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public DepartamentoController(ApplicationDbContext db)
+        public PrestatarioController(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Departamento> lista = _db.Departamento;
-            return View();
+            IEnumerable<Prestatario> lista = _db.Prestatario;
+            return View(lista); // Ahora estamos pasando la lista de Prestatarios a la vista
         }
 
         public IActionResult Crear()
@@ -27,17 +27,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(Departamento departamento)
+        public IActionResult Crear(Prestatario prestatario)
         {
             if (ModelState.IsValid)
             {
-                _db.Departamento.Add(departamento);
+                _db.Prestatario.Add(prestatario);
                 _db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(departamento);
+            return View(prestatario);
         }
 
         public IActionResult Editar(int? id)
@@ -47,7 +47,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Departamento.Find(id);
+            var obj = _db.Prestatario.Find(id);
 
             if (obj == null) { return NotFound(); }
 
@@ -56,17 +56,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Editar(Departamento departamento)
+        public IActionResult Editar(Prestatario prestatario)
         {
             if (ModelState.IsValid)
             {
-                _db.Departamento.Update(departamento);
+                _db.Prestatario.Update(prestatario);
                 _db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(departamento);
+            return View(prestatario);
         }
 
         public IActionResult Eliminar(int? id)
@@ -76,7 +76,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Departamento.Find(id);
+            var obj = _db.Prestatario.Find(id);
 
             if (obj == null) { return NotFound(); }
 
@@ -85,21 +85,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public IActionResult Eliminar(Departamento departamento)
+        public IActionResult Eliminar(Prestatario prestatario)
         {
-
-            if (departamento == null)
+            if (prestatario == null)
             {
                 return NotFound();
             }
 
-            _db.Departamento.Remove(departamento);
+            _db.Prestatario.Remove(prestatario);
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

@@ -5,19 +5,19 @@ using System.Collections.Generic;
 
 namespace Proyecto_TI.Controllers
 {
-    public class DepartamentoController : Controller
+    public class InstitucionController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public DepartamentoController(ApplicationDbContext db)
+        public InstitucionController(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Departamento> lista = _db.Departamento;
-            return View();
+            IEnumerable<Institucion> lista = _db.Institucion;
+            return View(lista);
         }
 
         public IActionResult Crear()
@@ -27,17 +27,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(Departamento departamento)
+        public IActionResult Crear(Institucion institucion)
         {
             if (ModelState.IsValid)
             {
-                _db.Departamento.Add(departamento);
+                _db.Institucion.Add(institucion);
                 _db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(departamento);
+            return View(institucion);
         }
 
         public IActionResult Editar(int? id)
@@ -47,7 +47,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Departamento.Find(id);
+            var obj = _db.Institucion.Find(id);
 
             if (obj == null) { return NotFound(); }
 
@@ -56,17 +56,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Editar(Departamento departamento)
+        public IActionResult Editar(Institucion institucion)
         {
             if (ModelState.IsValid)
             {
-                _db.Departamento.Update(departamento);
+                _db.Institucion.Update(institucion);
                 _db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(departamento);
+            return View(institucion);
         }
 
         public IActionResult Eliminar(int? id)
@@ -76,7 +76,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Departamento.Find(id);
+            var obj = _db.Institucion.Find(id);
 
             if (obj == null) { return NotFound(); }
 
@@ -85,21 +85,17 @@ namespace Proyecto_TI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public IActionResult Eliminar(Departamento departamento)
+        public IActionResult Eliminar(Institucion institucion)
         {
-
-            if (departamento == null)
+            if (institucion == null)
             {
                 return NotFound();
             }
 
-            _db.Departamento.Remove(departamento);
+            _db.Institucion.Remove(institucion);
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

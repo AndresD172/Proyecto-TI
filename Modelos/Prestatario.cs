@@ -29,24 +29,6 @@ namespace Modelos
         public string CorreoPrestatario { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
-        public Boolean TipoPrestatario { get; set; }
-
-        public int IdSeccion { get; set; }
-
-        [ForeignKey("IdSeccion")]
-        public virtual Seccion Seccion { get; set; }
-
-        public int IdDepartamento { get; set; }
-
-        [ForeignKey("IdDepartamento")]
-        public virtual Departamento Departamento { get; set; }
-
-        public int IdEspecialidad { get; set; }
-
-        [ForeignKey("IdEspecialidad")]
-        public virtual Especialidad Especialidad { get; set; }
-
-        [Required(ErrorMessage = "Campo obligatorio")]
         public Boolean Estado { get; set; }
 
 
