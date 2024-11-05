@@ -6,7 +6,7 @@ namespace Datos.Repositorio.IRepositorio
     {
         void Agregar(T entidad);
 
-        T Obtener(int id);
+        T? Obtener(int id);
 
         IEnumerable<T> ObtenerTodos(
             Expression<Func<T, bool>> filtro,
