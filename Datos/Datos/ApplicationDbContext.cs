@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Modelos;
 
 namespace Datos
 {
@@ -9,5 +10,9 @@ namespace Datos
         {
             
         }
+
+        public DbSet<Usuario>Usuario { get; set; }
+        public DbSet<Especialidad> Especialidad { get; set; }
+        public DbSet<CategoriaEquipo> CategoriaEquipo { get; set; }
     }
 }
