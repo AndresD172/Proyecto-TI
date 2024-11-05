@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Modelos
 {
-    internal class Especialidad
+    public class Especialidad
     {
         [Key]
         public int id { get; set; }

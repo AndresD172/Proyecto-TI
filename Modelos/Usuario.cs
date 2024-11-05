@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Modelos
 {
-    internal class Usuario
+    public class Usuario
     {
         [Key]
         public int id { get; set; }
