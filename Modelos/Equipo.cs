@@ -33,7 +33,7 @@ namespace Modelos
 
         public int IdCategoriaEquipo { get; set; }
 
-        //public virtual CategoriaEquipo? CategoriaEquipo { get; set; }
+        public virtual CategoriaEquipo? CategoriaEquipo { get; set; }
 
         public bool Estado { get; set; }
 

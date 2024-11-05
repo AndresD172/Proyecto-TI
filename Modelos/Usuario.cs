@@ -10,18 +10,18 @@ namespace Modelos
     public class Usuario
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public string nombreUsuario { get; set; }
+        public string NombreUsuario { get; set; }
 
         [Required]
-        public string correo { get; set; }
+        public string Correo { get; set; }
 
         [Required]
-        public string contrasena { get; set; }
+        public string Contrasena { get; set; }
 
         [Required]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
     }
 }

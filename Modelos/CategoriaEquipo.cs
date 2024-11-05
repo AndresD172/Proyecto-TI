@@ -10,12 +10,12 @@ namespace Modelos
     public class CategoriaEquipo
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public string descripcionEquipo { get; set; }
+        public string DescripcionEquipo { get; set; }
 
         [Required]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
     }
 }

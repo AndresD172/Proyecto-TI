@@ -16,6 +16,6 @@ namespace Modelos
         public string NombreEspecialidad { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
-        public Boolean Estado { get; set; }
+        public bool Estado { get; set; }
     }
 }
