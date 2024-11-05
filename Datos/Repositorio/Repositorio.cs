@@ -8,12 +8,17 @@ namespace Datos.Repositorio
     public class Repositorio<T> : IRepositorio<T> where T : class
     {
         private readonly ApplicationDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        internal DbSet<T> _dbSet;
 
         public Repositorio(ApplicationDbContext context)
         {
             _context = context;
             this._dbSet = _context.Set<T>();
+        }
+
+        public void Agregar(T entidad)
+        {
+            _dbSet.Add(entidad);
         }
 
         public T Obtener(int id)
@@ -46,21 +51,49 @@ namespace Datos.Repositorio
             return query.First();
         }
 
-        public IEnumerable<T> ObtenerTodos(
-            Expression<Func<T, bool>> filtro,
-            Func<IQueryable<T>, IOrderedQueryable<T>> ordenarPor,
-            List<string> propiedadesAIncluir,
-            bool seguirCambios = true)
+        public IEnumerable<T> ObtenerTodos(Expression<Func<T, bool>> filtro, Func<IQueryable<T>, IOrderedQueryable<T>> ordenarPor, List<string> propiedadesAIncluir, bool seguirCambios = true)
         {
-            return default;
+            IQueryable<T> query = _dbSet;
+
+            if (filtro != null)
+            {
+                query = query.Where(filtro);
+            }
+
+            if (!propiedadesAIncluir.IsNullOrEmpty())
+            {
+                foreach (string propiedad in propiedadesAIncluir)
+                {
+                    query = query.Include(propiedad);
+                }
+            }
+
+            if (ordenarPor != null)
+            {
+                query = ordenarPor(query);
+            }
+
+            if (!seguirCambios)
+            {
+                query = query.AsNoTracking();
+            }
+
+            return query.ToList();
         }
 
-        public void Agregar(T entidad) { }
+        public void Remover(T entidad)
+        {
+            _dbSet.Remove(entidad);
+        }
 
-        public void Remover(T entidad) { }
+        public void RemoverRango(IEnumerable<T> entidades)
+        {
+            _dbSet.RemoveRange(entidades);
+        }
 
-        public void RemoverRango(IEnumerable<T> entidades) { }
-
-        public void GuardarCambios() { }
+        public void GuardarCambios()
+        {
+            _context.SaveChanges();
+        }
     }
 }

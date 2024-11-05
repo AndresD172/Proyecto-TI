@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Repositorio.IRepositorio
 {
-    public interface IPrestamo : IRepositorio<Prestamo>
+    public interface IRepositorioPrestamo : IRepositorio<Prestamo>
     {
         void Actualizar(Prestamo prestamo);
     }

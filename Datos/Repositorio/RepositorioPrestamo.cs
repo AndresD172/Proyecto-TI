@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Repositorio
 {
-    public class RepositorioPrestamo : Repositorio<Prestamo>, IPrestamo
+    public class RepositorioPrestamo : Repositorio<Prestamo>, IRepositorioPrestamo
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,6 +17,9 @@ namespace Datos.Repositorio
             _context = context;
         }
 
-        public void Actualizar(Prestamo prestamo) { }
+        public void Actualizar(Prestamo prestamo)
+        {
+            _context.Update(prestamo);
+        }
     }
 }
