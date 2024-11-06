@@ -29,7 +29,7 @@ namespace Modelos
         public string CorreoPrestatario { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
-        public Boolean TipoPrestatario { get; set; }
+        public bool TipoPrestatario { get; set; }
 
         public int IdSeccion { get; set; }
 
@@ -47,7 +47,7 @@ namespace Modelos
         public virtual Especialidad Especialidad { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
-        public Boolean Estado { get; set; }
+        public bool Estado { get; set; }
 
 
     }

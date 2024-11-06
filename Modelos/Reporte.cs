@@ -17,7 +17,7 @@ namespace Modelos
         public string Descripcion { get; set; }
 
         [Required]
-        public DateTime FechaCreacion { get; set; }
+        public DateOnly FechaCreacion { get; set; }
 
         public bool Estado {  get; set; }
 
