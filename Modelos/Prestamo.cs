@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Modelos
@@ -8,18 +10,15 @@ namespace Modelos
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("IdEquipo")]
-        public int IdEquipo { get; set; }
+        [ForeignKey(nameof(Tecnico))]
+        public required string IdTecnico { get; set; }
+        public required virtual IdentityUser Tecnico { get; set; }
 
-        public virtual Equipo? Equipo { get; set; }
-
-        [ForeignKey("IdTecnico")]
-        public int IdTecnico { get; set; }
-
-        [ForeignKey("IdPrestatario")]
+        [ForeignKey(nameof(Prestatario))]
         public int IdPrestatario { get; set; }
-
         public virtual Prestatario? Prestatario { get; set; }
+
+        public virtual ICollection<Equipo> Equipos { get; set; } = new List<Equipo>();
 
         [Required(ErrorMessage = "Campo obligatorio.")]
         public DateOnly FechaPrestamo { get; set; }
