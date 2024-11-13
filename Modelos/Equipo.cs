@@ -30,10 +30,11 @@ namespace Modelos
         public string EstadoEquipo { get; set; }
 
         [ForeignKey("IdCategoriaEquipo")]
-
         public int IdCategoriaEquipo { get; set; }
 
         public virtual CategoriaEquipo? CategoriaEquipo { get; set; }
+
+        public virtual ICollection<Prestamo> Prestamos { get; set; } = new List<Prestamo>();
 
         public bool Estado { get; set; }
 

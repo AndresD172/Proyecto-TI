@@ -26,7 +26,7 @@ namespace Datos.Repositorio
             return _dbSet.Find(id);
         }
 
-        public T ObtenerPrimero(Expression<Func<T, bool>> filtro, List<string> propiedadesAIncluir, bool seguirCambios = true)
+        public T ObtenerPrimero(Expression<Func<T, bool>>? filtro, List<string>? propiedadesAIncluir, bool seguirCambios = true)
         {
             IQueryable<T> query = _dbSet;
 
@@ -51,7 +51,7 @@ namespace Datos.Repositorio
             return query.First();
         }
 
-        public IEnumerable<T> ObtenerTodos(Expression<Func<T, bool>> filtro, Func<IQueryable<T>, IOrderedQueryable<T>> ordenarPor, List<string> propiedadesAIncluir, bool seguirCambios = true)
+        public IEnumerable<T> ObtenerTodos(Expression<Func<T, bool>>? filtro, Func<IQueryable<T>, IOrderedQueryable<T>>? ordenarPor, List<string>? propiedadesAIncluir, bool seguirCambios = true)
         {
             IQueryable<T> query = _dbSet;
 
