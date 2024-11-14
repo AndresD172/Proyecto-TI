@@ -17,5 +17,8 @@ namespace Datos
         public DbSet<Seccion> Secciones { get; set; }
         public DbSet<CategoriaEquipo> CategoriasEquipos { get; set; }
         public DbSet<Prestamo> Prestamos { get; set; }
+        public DbSet<Equipo> Equipos {  get; set; }  
+        public DbSet<Multa> Multas { get; set; }
+        public DbSet<Reporte> Reportes { get; set; }
     }
 }

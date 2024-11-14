@@ -1,15 +1,15 @@
 ﻿using Datos;
 using Modelos;
-using Datos.Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
+using Datos.Repositorio.IRepositorio;
 
 namespace Proyecto_TI.Controllers
 {
     public class EspecialidadController : Controller
     {
-        private readonly IEspecialidadRepositorio _especialidadRepositorio;
+        private readonly IRepositorioEspecialidad _especialidadRepositorio;
 
-        public EspecialidadController(IEspecialidadRepositorio especialidadRepositorio)
+        public EspecialidadController(IRepositorioEspecialidad especialidadRepositorio)
         {
             _especialidadRepositorio = especialidadRepositorio;
         }
@@ -26,7 +26,7 @@ namespace Proyecto_TI.Controllers
         {
             return View();
         }
-
+    
         //POST UPSERT
         [HttpPost]
         [ValidateAntiForgeryToken]

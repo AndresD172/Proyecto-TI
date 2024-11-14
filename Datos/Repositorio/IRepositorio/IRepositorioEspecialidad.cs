@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Datos.Datos.Repositorio.IRepositorio
+namespace Datos.Repositorio.IRepositorio
 {
-    public interface IEspecialidadRepositorio : IRepositorio<Especialidad>
+    public interface IRepositorioEspecialidad : IRepositorio<Especialidad>
     {
         void Actualizar(Especialidad especialidad);
     }
