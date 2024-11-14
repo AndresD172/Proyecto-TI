@@ -10,8 +10,6 @@ namespace Modelos
 {
     public class Equipo
     {
-
-        
         [Key]
         public int Id { get; set; }
 
@@ -24,7 +22,7 @@ namespace Modelos
         [Required]
         public string NumeroSerie { get; set; }
 
-        public string Descripcion {  get; set; }
+        public string Descripcion { get; set; }
 
         [Required]
         public string EstadoEquipo { get; set; }
@@ -37,6 +35,5 @@ namespace Modelos
         public virtual ICollection<Prestamo> Prestamos { get; set; } = new List<Prestamo>();
 
         public bool Estado { get; set; }
-
     }
 }

@@ -15,7 +15,7 @@ namespace Datos.Repositorio.IRepositorio
         /// </summary>
         /// <param name="id">ID de la entidad.</param>
         /// <returns><see cref="T"/> cuando se obtiene un resultado; de lo contrario, <c>null</c>.</returns>
-        T? Obtener(int id);
+        T? Obtener(int? id);
 
         /// <summary>
         /// Obtiene una colección de entidades de la base de datos. 
