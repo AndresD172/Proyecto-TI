@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Modelos
 {
@@ -7,10 +12,10 @@ namespace Modelos
         [Key]
         public int IdSeccion { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
+        [Required]
         public string NombreSeccion { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
+        [Required]
         public bool Estado { get; set; }
     }
 }

@@ -11,42 +11,24 @@ namespace Modelos
     public class Prestatario
     {
         [Key]
-        public int IdPrestatario { get; set; }
+        public int Id { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        public string NombrePrestatario { get; set; }
+        [Required]
+        public string Nombre{ get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        public string PrimerApellidoPrestatario { get; set; }
+        [Required]
+        public string PrimerApellido { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        public string SegundoApellidoPrestatario { get; set; }
+        [Required]
+        public string SegundoApellido { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        public string IdentificacionPrestatario { get; set; }
+        [Required]
+        public string Identificacion { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        public string CorreoPrestatario { get; set; }
+        [Required]
+        public string Correo { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        public bool TipoPrestatario { get; set; }
-
-        public int IdSeccion { get; set; }
-
-        [ForeignKey("IdSeccion")]
-        public virtual Seccion Seccion { get; set; }
-
-        public int IdDepartamento { get; set; }
-
-        [ForeignKey("IdDepartamento")]
-        public virtual Departamento Departamento { get; set; }
-
-        public int IdEspecialidad { get; set; }
-
-        [ForeignKey("IdEspecialidad")]
-        public virtual Especialidad Especialidad { get; set; }
-
-        [Required(ErrorMessage = "Campo obligatorio")]
+        [Required]
         public bool Estado { get; set; }
 
 
