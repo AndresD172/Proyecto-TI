@@ -1,8 +1,8 @@
 ﻿using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Modelos;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
@@ -23,43 +23,85 @@ namespace Proyecto_TI.Controllers
             return View(prestamos);
         }
 
-        public IActionResult Agregar()
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            ViewModelPrestamo viewModelPrestamo = new ViewModelPrestamo
+            {
+                Prestamo = new Prestamo(),
+                Equipos = _repositorio.ObtenerOpcionesEquipos()
+            };
+
+            if (id == null)
+            {
+                return View(viewModelPrestamo);
+            }
+            else
+            {
+                viewModelPrestamo.Prestamo = _repositorio.Obtener(id);
+                if (viewModelPrestamo.Prestamo == null)
+                {
+                    return NotFound();
+                }
+            }
+
+            return View(viewModelPrestamo);
         }
 
         [ValidateAntiForgeryToken, HttpPost]
-        public async Task<IActionResult> Agregar(Prestamo prestamo)
+        public async Task<IActionResult> Upsert(ViewModelPrestamo viewModelPrestamo)
         {
             if (!ModelState.IsValid)
             {
-                return View(prestamo);
+                // Reinicia la lista de equipos del préstamo.
+                viewModelPrestamo.Equipos = _repositorio.ObtenerOpcionesEquipos();
+                return View(viewModelPrestamo);
             }
 
-            // Obtiene el usuario actual basado en sus claims.
-            IdentityUser? user = await _userManager.GetUserAsync(User);
-            prestamo.IdTecnico = user.Id;
+            int id = viewModelPrestamo.Prestamo.Id;
+            if (id == 0)
+            {
+                // Obtiene el usuario actual basado en sus claims.
+                IdentityUser? user = await _userManager.GetUserAsync(User);
+                viewModelPrestamo.Prestamo.IdTecnico = user.Id;
 
-            _repositorio.Agregar(prestamo);
+                _repositorio.Agregar(viewModelPrestamo.Prestamo);
+            }
+            else
+            {
+                _repositorio.Actualizar(viewModelPrestamo.Prestamo);
+            }
+
             _repositorio.GuardarCambios();
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult Modificar()
+        public IActionResult Eliminar(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Prestamo? prestamo = _repositorio.Obtener(id);
+
+            if (prestamo == null)
+            {
+                return NotFound();
+            }
+
+            return View(prestamo);
         }
 
         [ValidateAntiForgeryToken, HttpPost]
-        public IActionResult Modificar(Prestamo prestamo)
+        public IActionResult Eliminar(Prestamo prestamo)
         {
-            if (!ModelState.IsValid)
+            if (prestamo == null)
             {
-                return View(prestamo);
+                return NotFound();
             }
 
-            _repositorio.Actualizar(prestamo);
+            _repositorio.Remover(prestamo);
             _repositorio.GuardarCambios();
 
             return RedirectToAction("Index");

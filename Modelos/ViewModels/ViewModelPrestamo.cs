@@ -9,6 +9,7 @@ namespace Modelos.ViewModels
 {
     public class ViewModelPrestamo
     {
-        IEnumerable<SelectListItem> equipos;
+        public Prestamo? Prestamo { get; set; }
+        public IEnumerable<SelectListItem> Equipos { get; set; }
     }
 }
