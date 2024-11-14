@@ -11,8 +11,8 @@ namespace Modelos
         public int Id { get; set; }
 
         [ForeignKey(nameof(Tecnico))]
-        public required string IdTecnico { get; set; }
-        public required virtual IdentityUser Tecnico { get; set; }
+        public string IdTecnico { get; set; }
+        public virtual IdentityUser Tecnico { get; set; }
 
         [ForeignKey(nameof(Prestatario))]
         public int IdPrestatario { get; set; }

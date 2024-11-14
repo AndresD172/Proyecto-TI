@@ -21,7 +21,7 @@ namespace Datos.Repositorio
             _dbSet.Add(entidad);
         }
 
-        public T? Obtener(int id)
+        public T? Obtener(int? id)
         {
             return _dbSet.Find(id);
         }
