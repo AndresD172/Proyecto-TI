@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Proyecto_TI.Controllers
 {
-    public class DepartamentoController : Controller
+    public class PrestatarioController : Controller
     {
-        private readonly IRepositorioDepartamento _departamentoRepositorio;
+        private readonly IRepositorioPrestatario _prestatarioRepositorio;
 
-        public DepartamentoController(IRepositorioDepartamento departamentoRepositorio)
+        public PrestatarioController(IRepositorioPrestatario prestatarioRepositorio)
         {
-            _departamentoRepositorio = departamentoRepositorio;
+            _prestatarioRepositorio = prestatarioRepositorio;
         }
 
         // GET: Index
         public IActionResult Index()
         {
-            IEnumerable<Departamento> lista = _departamentoRepositorio.ObtenerTodos();
+            IEnumerable<Prestatario> lista = _prestatarioRepositorio.ObtenerTodos();
             return View(lista);
         }
 
@@ -26,44 +26,44 @@ namespace Proyecto_TI.Controllers
         {
             if (id == null || id == 0)
             {
-                // Crear nuevo departamento
-                return View(new Departamento());
+                // Crear nuevo prestatario
+                return View(new Prestatario());
             }
             else
             {
-                // Editar departamento existente
-                var departamento = _departamentoRepositorio.Obtener(id.GetValueOrDefault());
-                if (departamento == null)
+                // Editar prestatario existente
+                var prestatario = _prestatarioRepositorio.Obtener(id.GetValueOrDefault());
+                if (prestatario == null)
                 {
                     return NotFound();
                 }
-                return View(departamento);
+                return View(prestatario);
             }
         }
 
         // POST: Upsert
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Departamento departamento)
+        public IActionResult Upsert(Prestatario prestatario)
         {
             if (ModelState.IsValid)
             {
                 // Nuevo registro
-                if (departamento.IdDepartamento == 0)
+                if (prestatario.Id == 0)
                 {
-                    _departamentoRepositorio.Agregar(departamento);
+                    _prestatarioRepositorio.Agregar(prestatario);
                 }
                 // Actualización
                 else
                 {
-                    _departamentoRepositorio.Actualizar(departamento);
+                    _prestatarioRepositorio.Actualizar(prestatario);
                 }
 
-                _departamentoRepositorio.GuardarCambios();
+                _prestatarioRepositorio.GuardarCambios();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(departamento);
+            return View(prestatario);
         }
 
         // GET: Eliminar
@@ -74,13 +74,13 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var departamento = _departamentoRepositorio.Obtener(id.GetValueOrDefault());
-            if (departamento == null)
+            var prestatario = _prestatarioRepositorio.Obtener(id.GetValueOrDefault());
+            if (prestatario == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(prestatario);
         }
 
         // POST: Eliminar
@@ -88,14 +88,14 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EliminarConfirmado(int id)
         {
-            var departamento = _departamentoRepositorio.Obtener(id);
-            if (departamento == null)
+            var prestatario = _prestatarioRepositorio.Obtener(id);
+            if (prestatario == null)
             {
                 return NotFound();
             }
 
-            _departamentoRepositorio.Remover(departamento);
-            _departamentoRepositorio.GuardarCambios();
+            _prestatarioRepositorio.Remover(prestatario);
+            _prestatarioRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
         }
     }

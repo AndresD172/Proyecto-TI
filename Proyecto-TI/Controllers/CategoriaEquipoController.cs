@@ -15,9 +15,9 @@ namespace Proyecto_TI.Controllers
 
         public IActionResult Index()
         {
-            //IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos;
-            //return View(lista);
-            return View();
+            IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos;
+            return View(lista);
+
         }
 
         //GET UPSERT
