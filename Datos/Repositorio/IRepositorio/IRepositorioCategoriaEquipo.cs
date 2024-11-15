@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Datos.Datos.Repositorio.IRepositorio
+namespace Datos.Repositorio.IRepositorio
 {
-    public interface ICategoriaEquipoRepositorio : IRepositorio<CategoriaEquipo>
+    public interface IRepositorioCategoriaEquipo : IRepositorio<CategoriaEquipo>
     {
         void Actualizar(CategoriaEquipo categoriaEquipo);
     }
-    
+
 }

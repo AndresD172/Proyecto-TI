@@ -1,27 +1,24 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Datos.Repositorio.IRepositorio;
 using Modelos;
 
 namespace Proyecto_TI.Controllers
 {
-    public class MultaController : Controller
+    public class ReporteController : Controller
     {
-        private readonly IRepositorioMulta _multaRepositorio;
+        
+        private readonly IRepositorioReporte _reporteRepositorio;
 
-        public MultaController(IRepositorioMulta multaRepositorio)
+        public ReporteController(IRepositorioReporte reporteRepositorio)
         {
-
-            _multaRepositorio = multaRepositorio;
-
+            _reporteRepositorio = reporteRepositorio;
         }
-
-
 
         public IActionResult Index()
         {
 
-            IEnumerable<Multa> lista = _multaRepositorio.ObtenerTodos();
-
+            IEnumerable<Reporte> lista = _reporteRepositorio.ObtenerTodos();
+            
             return View(lista);
 
         }
@@ -37,30 +34,32 @@ namespace Proyecto_TI.Controllers
         //Post Upsert
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Multa multa)
+        public IActionResult Upsert(Reporte reporte)
         {
+
             if(ModelState.IsValid)
             {
 
                 //Nuevo
-                if (multa.Id == 0)
+                if(reporte.Id == 0)
                 {
 
-                    _multaRepositorio.Agregar(multa);
+                    _reporteRepositorio.Agregar(reporte);
 
                 }
                 //Editar
                 else
                 {
-
-                    _multaRepositorio.Actualizar(multa);
-
+                    
+                    _reporteRepositorio.Actualizar(reporte);
+                    
                 }
-                _multaRepositorio.GuardarCambios();
+                _reporteRepositorio.GuardarCambios();
                 return RedirectToAction(nameof(Index));
 
             }
-            return View(multa);
+            return View(reporte);
+
         }
 
         //Get Eliminar
@@ -72,7 +71,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var obj = _multaRepositorio.Obtener(id.GetValueOrDefault());
+            var obj = _reporteRepositorio.Obtener(id.GetValueOrDefault());
 
             if (obj == null)
             {
@@ -80,21 +79,23 @@ namespace Proyecto_TI.Controllers
 
             }
             return View(obj);
+
         }
 
         //Post Eliminar
-        public IActionResult Eliminar(Multa multa)
+        public IActionResult Eliminar(Reporte reporte)
         {
 
-            if (multa == null)
+            if(reporte == null)
             {
 
                 return NotFound();
 
             }
-            _multaRepositorio.Remover(multa);
-            _multaRepositorio.GuardarCambios();
+            _reporteRepositorio.Remover(reporte);
+            _reporteRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
+
         }
 
     }

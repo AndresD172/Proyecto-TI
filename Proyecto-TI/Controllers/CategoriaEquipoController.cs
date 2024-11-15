@@ -1,4 +1,4 @@
-﻿using Datos.Datos.Repositorio.IRepositorio;
+﻿using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
 using Modelos;
 
@@ -6,9 +6,9 @@ namespace Proyecto_TI.Controllers
 {
     public class CategoriaEquipoController : Controller
     {
-        private readonly ICategoriaEquipoRepositorio _categoriaEquipoRepositorio;
+        private readonly IRepositorioCategoriaEquipo _categoriaEquipoRepositorio;
 
-        public CategoriaEquipoController(ICategoriaEquipoRepositorio categoriaEquipoRepositorio)
+        public CategoriaEquipoController(IRepositorioCategoriaEquipo categoriaEquipoRepositorio)
         {
             _categoriaEquipoRepositorio = categoriaEquipoRepositorio;
         }
@@ -17,7 +17,6 @@ namespace Proyecto_TI.Controllers
         {
             IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos;
             return View(lista);
-
         }
 
         //GET UPSERT
@@ -34,7 +33,7 @@ namespace Proyecto_TI.Controllers
             if (ModelState.IsValid)
             {
                 //Nuevo
-                if (categoriaEquipo.id == 0)
+                if (categoriaEquipo.Id == 0)
                 {
                     _categoriaEquipoRepositorio.Agregar(categoriaEquipo);
                 }

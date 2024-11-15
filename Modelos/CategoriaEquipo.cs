@@ -12,7 +12,7 @@ namespace Modelos
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required] 
         public string DescripcionEquipo { get; set; }
 
         [Required]

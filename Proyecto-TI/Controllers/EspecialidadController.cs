@@ -1,7 +1,7 @@
-﻿using Datos;
+using Datos;
 using Modelos;
-using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
+using Datos.Repositorio.IRepositorio;
 
 namespace Proyecto_TI.Controllers
 {
