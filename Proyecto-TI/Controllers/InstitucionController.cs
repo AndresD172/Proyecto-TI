@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Proyecto_TI.Controllers
 {
-    public class DepartamentoController : Controller
+    public class InstitucionController : Controller
     {
-        private readonly IRepositorioDepartamento _departamentoRepositorio;
+        private readonly IRepositorioInstitucion _institucionRepositorio;
 
-        public DepartamentoController(IRepositorioDepartamento departamentoRepositorio)
+        public InstitucionController(IRepositorioInstitucion institucionRepositorio)
         {
-            _departamentoRepositorio = departamentoRepositorio;
+            _institucionRepositorio = institucionRepositorio;
         }
 
         // GET: Index
         public IActionResult Index()
         {
-            IEnumerable<Departamento> lista = _departamentoRepositorio.ObtenerTodos();
+            IEnumerable<Institucion> lista = _institucionRepositorio.ObtenerTodos();
             return View(lista);
         }
 
@@ -26,44 +26,44 @@ namespace Proyecto_TI.Controllers
         {
             if (id == null || id == 0)
             {
-                // Crear nuevo departamento
-                return View(new Departamento());
+                // Crear nueva institución
+                return View(new Institucion());
             }
             else
             {
-                // Editar departamento existente
-                var departamento = _departamentoRepositorio.Obtener(id.GetValueOrDefault());
-                if (departamento == null)
+                // Editar institución existente
+                var institucion = _institucionRepositorio.Obtener(id.GetValueOrDefault());
+                if (institucion == null)
                 {
                     return NotFound();
                 }
-                return View(departamento);
+                return View(institucion);
             }
         }
 
         // POST: Upsert
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Departamento departamento)
+        public IActionResult Upsert(Institucion institucion)
         {
             if (ModelState.IsValid)
             {
                 // Nuevo registro
-                if (departamento.IdDepartamento == 0)
+                if (institucion.IdInstitucion == 0)
                 {
-                    _departamentoRepositorio.Agregar(departamento);
+                    _institucionRepositorio.Agregar(institucion);
                 }
                 // Actualización
                 else
                 {
-                    _departamentoRepositorio.Actualizar(departamento);
+                    _institucionRepositorio.Actualizar(institucion);
                 }
 
-                _departamentoRepositorio.GuardarCambios();
+                _institucionRepositorio.GuardarCambios();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(departamento);
+            return View(institucion);
         }
 
         // GET: Eliminar
@@ -74,13 +74,13 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var departamento = _departamentoRepositorio.Obtener(id.GetValueOrDefault());
-            if (departamento == null)
+            var institucion = _institucionRepositorio.Obtener(id.GetValueOrDefault());
+            if (institucion == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(institucion);
         }
 
         // POST: Eliminar
@@ -88,14 +88,14 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EliminarConfirmado(int id)
         {
-            var departamento = _departamentoRepositorio.Obtener(id);
-            if (departamento == null)
+            var institucion = _institucionRepositorio.Obtener(id);
+            if (institucion == null)
             {
                 return NotFound();
             }
 
-            _departamentoRepositorio.Remover(departamento);
-            _departamentoRepositorio.GuardarCambios();
+            _institucionRepositorio.Remover(institucion);
+            _institucionRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
         }
     }

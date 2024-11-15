@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Datos.Repositorio.IRepositorio;
 using Modelos;
 
@@ -6,7 +6,6 @@ namespace Proyecto_TI.Controllers
 {
     public class MultaController : Controller
     {
-
         private readonly IRepositorioMulta _multaRepositorio;
 
         public MultaController(IRepositorioMulta multaRepositorio)
@@ -100,4 +99,3 @@ namespace Proyecto_TI.Controllers
 
     }
 }
-

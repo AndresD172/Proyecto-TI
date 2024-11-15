@@ -1,15 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Modelos
 {
     public class Institucion
     {
         [Key]
-        public int Id { get; set; }
+        public int IdInstitucion { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio.")]
-        public required string Descripcion { get; set; }
+        [Required]
+        public string NombreInstitucion { get; set; }
 
+        [Required]
         public bool Estado { get; set; }
     }
 }
