@@ -1,5 +1,4 @@
-﻿using Datos.Datos.Repositorio.IRepositorio;
-using Datos.Repositorio.IRepositorio;
+﻿using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
 using Modelos;
 

@@ -15,7 +15,7 @@ namespace Proyecto_TI.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos;
+            IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos();
             return View(lista);
         }
 
