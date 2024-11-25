@@ -19,11 +19,11 @@ namespace Datos.Repositorio
 
         public void Actualizar(Especialidad especialidad)
         {
-            var especialidadAnterior = _db.Especialidades.FirstOrDefault(e => e.Id == especialidad.IdEspecialidad);
+            var especialidadAnterior = _db.Especialidades.FirstOrDefault(e => e.IdEspecialidad == especialidad.IdEspecialidad);
             if (especialidadAnterior != null)
             {
 
-                especialidadAnterior.Nombre = especialidad.NombreEspecialidad;
+                especialidadAnterior.NombreEspecialidad = especialidad.NombreEspecialidad;
 
             }
         }

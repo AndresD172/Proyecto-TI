@@ -2,6 +2,7 @@
 using Modelos;
 using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
@@ -18,7 +19,12 @@ namespace Proyecto_TI.Controllers
         public IActionResult Index()
         {
             IEnumerable<Institucion> lista = _institucionRepositorio.ObtenerTodos();
-            return View(lista);
+            ViewModelInstitucion InstitucionVM = new ViewModelInstitucion
+            {
+                institucion = new Institucion(),
+                listaInstituciones = lista
+            };
+            return View(InstitucionVM);
         }
 
         // GET: Upsert
@@ -66,6 +72,15 @@ namespace Proyecto_TI.Controllers
             return View(institucion);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ViewModelInstitucion institucion)
+        {
+            var institucionVar = institucion.institucion;
+            Upsert(institucion);
+            return RedirectToAction("Index");
+        }
+
         // GET: Eliminar
         public IActionResult Eliminar(int? id)
         {
@@ -97,6 +112,17 @@ namespace Proyecto_TI.Controllers
             _institucionRepositorio.Remover(institucion);
             _institucionRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Buscar(string query)
+        {
+            IEnumerable<Institucion> lista = _institucionRepositorio.ObtenerTodos(x => x.NombreInstitucion.ToLower().Equals(query.ToLower()));
+            ViewModelInstitucion institucionVM = new ViewModelInstitucion
+            {
+                institucion = new Institucion(),
+                listaInstituciones = lista
+            };
+            return View("Index", institucionVM);
         }
     }
 }

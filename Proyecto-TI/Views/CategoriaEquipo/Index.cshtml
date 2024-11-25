@@ -1,4 +1,4 @@
-﻿@model Modelos.IEnumerable<CategoriaEquipo>
+﻿@model Modelos.ViewModels.ViewModelCategoriaEquipo
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,7 +18,7 @@
             <div class="row justify-content-center">
                 <div class="col-7 align-items-center">   
                     <!--AGREGAR-->
-                    <input asp-for="DescripcionEquipo" type="text" class="form-control rounded-pill" placeholder="Agregar categoria" aria-label="Agregar categoria">
+                        <input asp-for="categoriaEquipo.DescripcionEquipo" type="text" class="form-control rounded-pill" placeholder="Agregar categoria" aria-label="Agregar categoria">
                 </div>
                 <br>
                 <br>
@@ -33,10 +33,33 @@
             </div>
         </div>
     </form>
+    <form method="post" asp-action="Buscar">
         <!--BUSCAR-->
+        <div class="container my-4 gx-0">
+            <div class="row">
 
+                <div class="col-3">
+                    <div class="input-group">
+                        @{
+                            string query = null;
+                        }
+                        <input asp-for=@(query) type="text" class="form-control rounded-pill" placeholder="Buscar categoria " aria-label="Buscar categoria"> 
+                    </div>
+                </div>
+
+                <div class="col-2 gx-0">
+                    <button type="submit" class="btn btn-primary rounded-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+     </form>
     <!--TABLA DE CATEGORIAS-->
-    @if (Model.Any())
+        @if (Model.listaCategoriasEquipos.Any())
     {
         <table class="table table-striped text-center">
             <thead class="table-primary">
@@ -46,7 +69,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.listaCategoriasEquipos)
                 {
                     <tr>
                         <td>@item.DescripcionEquipo</td>

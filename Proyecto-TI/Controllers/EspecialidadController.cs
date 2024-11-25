@@ -2,6 +2,7 @@ using Datos;
 using Modelos;
 using Microsoft.AspNetCore.Mvc;
 using Datos.Repositorio.IRepositorio;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
@@ -18,7 +19,12 @@ namespace Proyecto_TI.Controllers
         public IActionResult Index()
         {
             IEnumerable<Especialidad> lista = _especialidadRepositorio.ObtenerTodos();
-            return View(lista);
+            ViewModelEspecialidad EspecialidadVM = new ViewModelEspecialidad
+            {
+                especialidad = new Especialidad(),
+                listaEspecialidades = lista
+            };
+            return View(EspecialidadVM);
         }
 
         // GET: Upsert
@@ -66,6 +72,14 @@ namespace Proyecto_TI.Controllers
             return View(especialidad);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ViewModelEspecialidad especialidad)
+        {
+            var especialidadVar = especialidad.especialidad;
+            Upsert(especialidad);
+            return RedirectToAction("Index");
+        }
         // GET: Eliminar
         public IActionResult Eliminar(int? id)
         {
@@ -97,6 +111,17 @@ namespace Proyecto_TI.Controllers
             _especialidadRepositorio.Remover(especialidad);
             _especialidadRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Buscar(string query)
+        {
+            IEnumerable<Especialidad> lista = _especialidadRepositorio.ObtenerTodos(x => x.NombreEspecialidad.ToLower().Equals(query.ToLower()));
+            ViewModelEspecialidad especialidadVM = new ViewModelEspecialidad
+            {
+                especialidad = new Especialidad(),
+                listaEspecialidades = lista
+            };
+            return View("Index", especialidadVM);
         }
     }
 }

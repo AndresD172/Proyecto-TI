@@ -1,6 +1,7 @@
 ﻿using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
 using Modelos;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
@@ -16,7 +17,12 @@ namespace Proyecto_TI.Controllers
         public IActionResult Index()
         {
             IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos();
-            return View(lista);
+            ViewModelCategoriaEquipo categoriaEquipoVM = new ViewModelCategoriaEquipo
+            {
+                categoriaEquipo = new CategoriaEquipo(),
+				listaCategoriasEquipos = lista
+            };
+            return View(categoriaEquipoVM);
         }
 
         //GET UPSERT
@@ -48,6 +54,15 @@ namespace Proyecto_TI.Controllers
             return View(categoriaEquipo);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ViewModelCategoriaEquipo categoriaEquipo)
+        {
+            var categoria = categoriaEquipo.categoriaEquipo;
+            Upsert(categoria);
+            return RedirectToAction("Index");
+        }
+
         //GET ELIMINAR
         public IActionResult Eliminar(int? id)
         {
@@ -68,6 +83,8 @@ namespace Proyecto_TI.Controllers
         }
 
         //POST ELIMINAR
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Eliminar(CategoriaEquipo categoriaEquipo)
         {
 
@@ -80,5 +97,15 @@ namespace Proyecto_TI.Controllers
             _categoriaEquipoRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Buscar(string query) {
+            IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos(x => x.DescripcionEquipo.ToLower().Equals(query.ToLower()));
+            ViewModelCategoriaEquipo categoriaEquipoVM =new ViewModelCategoriaEquipo { 
+                categoriaEquipo=new CategoriaEquipo(),
+				listaCategoriasEquipos = lista
+            };
+            return View("Index", categoriaEquipoVM);
+        }
+
     }
 }

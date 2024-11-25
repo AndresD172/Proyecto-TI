@@ -2,6 +2,7 @@
 using Modelos;
 using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
@@ -18,7 +19,12 @@ namespace Proyecto_TI.Controllers
         public IActionResult Index()
         {
             IEnumerable<Departamento> lista = _departamentoRepositorio.ObtenerTodos();
-            return View(lista);
+            ViewModelDepartamento departamentoVM = new ViewModelDepartamento
+            {
+                departamento = new Departamento(),
+                listaDepartamentos = lista
+            };
+            return View(departamentoVM);
         }
 
         // GET: Upsert
@@ -66,6 +72,15 @@ namespace Proyecto_TI.Controllers
             return View(departamento);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ViewModelDepartamento departamento)
+        {
+            var departamentoVar = departamento.departamento;
+            Upsert(departamentoVar);
+            return RedirectToAction("Index");
+        }
+
         // GET: Eliminar
         public IActionResult Eliminar(int? id)
         {
@@ -97,6 +112,17 @@ namespace Proyecto_TI.Controllers
             _departamentoRepositorio.Remover(departamento);
             _departamentoRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Buscar(string query)
+        {
+            IEnumerable<Departamento> lista = _departamentoRepositorio.ObtenerTodos(x => x.NombreDepartamento.ToLower().Equals(query.ToLower()));
+            ViewModelDepartamento departamentoVM = new ViewModelDepartamento
+            {
+                departamento = new Departamento(),
+                listaDepartamentos = lista
+            };
+            return View("Index", departamentoVM);
         }
     }
 }

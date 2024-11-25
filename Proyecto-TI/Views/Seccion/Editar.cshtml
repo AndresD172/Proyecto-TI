@@ -1,11 +1,11 @@
-﻿@model Modelos.IEnumerable<Seccion>
+﻿@model Modelos.Seccion
 @{
     ViewData["Title"] = "Upsert";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <form method="post" asp-action="Upsert">
-    <input asp-for="Id" type="hidden" />
+    <input asp-for="IdSeccion" type="hidden" />
     <div class="container align-items-center mt-5 pt-5">
         <div class="col-12 text-center my-4">
             <h2 class="titulo text-center">Editar Sección</h2>
