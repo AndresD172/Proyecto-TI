@@ -1,5 +1,70 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Ferretero_Utilidades
+@model Ferretero_Models.Multa
+
 @{
+    var titulo = "¿Está seguro de eliminar esta multa?";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container adjust">
+    <h1 class="titulo text-center mb-4">@titulo</h1>
+    <div class="card mx-auto shadow-sm col-lg-7">
+        <div class="card-body">
+            <form method="post" asp-action="Eliminar">
+                <input asp-for="Multa.Id" hidden>
+
+                <div class="border p-3">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <h2 class="text-danger">@titulo</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Multa.PrestamoId" class="form-label">Préstamo</label>
+                            <input asp-for="Multa.PrestamoId" class="form-control" disabled />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Multa.TipoMulta" class="form-label">Tipo de Multa</label>
+                            <input asp-for="Multa.TipoMulta" class="form-control" disabled />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Multa.Sancion" class="form-label">Sanción</label>
+                            <input asp-for="Multa.Sancion" class="form-control" disabled />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Multa.Estado" class="form-label">Estado</label>
+                            <input asp-for="Multa.Estado" class="form-control" disabled />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Multa.FechaEmision" class="form-label">Fecha de emisión</label>
+                            <input asp-for="Multa.FechaEmision" type="date" class="form-control" disabled />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Multa.Descripcion" class="form-label">Descripción</label>
+                        <textarea asp-for="Multa.Descripcion" class="form-control" rows="3" disabled></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <a asp-controller="Multa" asp-action="Index" class="btn btn-success">Regresar</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
 }
