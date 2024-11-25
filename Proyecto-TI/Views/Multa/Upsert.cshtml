@@ -1,5 +1,5 @@
-﻿@using Modelos;
-@using Utilidades;
+﻿@using Utilidades;
+@model Modelos.ViewModels.ViewModelMulta;
 @{
 }
 @{
@@ -20,10 +20,10 @@
 
                 <div class="mb-3">
                     <label for="prestario" class="form-label">Préstamo</label>
-                    <select asp-for="Multa.PrestamoId" asp-items="@(new SelectList(Model.PrestamoLista, "Id", "NombreCompleto"))" class="form-select">
+                    <select asp-for="Multa.IdPrestamo" asp-items="@Model.Prestamos" class="form-select">
                         <option disabled selected>--Seleccione un prestatario--</option>
                     </select>
-                    <span asp-validation-for="Multa.PrestamoId" class="text-danger"></span>
+                    <span asp-validation-for="Multa.IdPrestamo" class="text-danger"></span>
                 </div>
 
                 <div class="row">
@@ -34,12 +34,12 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="sancion" class="form-label">Sanción</label>
-                        <select asp-for="Multa.Sancion" class="form-select">
+                        <select asp-for="Multa.Monto" class="form-select">
                             <option disabled selected>Seleccione una sanción</option>
                             <option value="1">Boleta disciplinaria</option>
                             <option value="2">Cobro</option>
                         </select>
-                        <span asp-validation-for="Multa.Sancion" class="text-danger"></span>
+                        <span asp-validation-for="Multa.Monto" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -50,8 +50,8 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="fechaEmision" class="form-label">Fecha de emisión</label>
-                        <input asp-for="Multa.FechaEmision" type="date" class="form-control">
-                        <span asp-validation-for="Multa.FechaEmision" class="text-danger"></span>
+                        <input asp-for="Multa.FechaCreacion" type="date" class="form-control">
+                        <span asp-validation-for=Multa.FechaCreacion class="text-danger"></span>
                     </div>
                 </div>
 

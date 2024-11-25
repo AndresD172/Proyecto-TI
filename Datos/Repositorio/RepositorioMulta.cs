@@ -29,14 +29,11 @@ namespace Datos.Repositorio
 
         public IEnumerable<SelectListItem> ObtenerOpcionesPrestamos()
         {
-            return _context.Prestamos
-                .Include(p => p.Prestatario) 
-                .Select(x => new SelectListItem
-                {
-                    Text = $"{x.Prestatario.Nombre} {x.Prestatario.PrimerApellido} {x.Prestatario.SegundoApellido}", 
-                    Value = x.Id.ToString() 
-                })
-                .ToList();
+            return _context.Prestamos.Select(p => new SelectListItem
+            {
+                Text = p.Prestatario.Nombre + p.Prestatario.PrimerApellido,
+                Value = p.Id.ToString()
+            });
         }
 
     }

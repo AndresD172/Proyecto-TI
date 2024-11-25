@@ -39,10 +39,10 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Prestatario: @multa.Prestamo.Prestatario.NombreCompleto</p>
+                        <p class="card-text">Prestatario: @multa.Prestamo.Prestatario.Nombre + @multa.Prestamo.Prestatario.PrimerApellido</p>
                         <p class="card-text">Fecha de emisión: @multa.FechaCreacion.ToString("dd/MM/yyyy")</p>
                         <p class="card-text">Descripción: @multa.Descripcion</p>
-                        <p class="card-text">Sanción: ₡@string.Format("{0:N0}", multa.Sancion)</p>
+                        <p class="card-text">Sanción: ₡@string.Format("{0:N0}", multa.Monto)</p>
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <a asp-controller="Multa" asp-action="Upsert" asp-route-id="@multa.Id" class="btn btn-color-editar btn-sm d-flex align-items-center margen">

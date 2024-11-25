@@ -27,18 +27,13 @@ namespace Modelos
         public bool TipoMulta {  get; set; }
 
         [Required]
-        public double Sancion { get; set; }
+        public double Monto { get; set; }
 
         [Required]
         public bool Estado {  get; set; }
 
         [ForeignKey("IdPrestamo")]
         public int IdPrestamo { get; set; }
-
-        [NotMapped]
-        public string NombrePrestatario => Prestamo?.Prestatario != null
-        ? $"{Prestamo.Prestatario.Nombre} {Prestamo.Prestatario.PrimerApellido} {Prestamo.Prestatario.SegundoApellido}"
-        : string.Empty;
 
         public virtual Prestamo? Prestamo { get; set; }
 

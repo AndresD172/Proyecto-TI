@@ -30,13 +30,5 @@ namespace Modelos
 
         [Required]
         public bool Estado { get; set; }
-
-        public string NombreCompleto
-        {
-            get
-            {
-                return $"{Nombre} {PrimerApellido} {SegundoApellido}";
-            }
-        }
     }
 }
