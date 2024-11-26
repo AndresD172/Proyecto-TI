@@ -27,7 +27,7 @@ namespace Modelos
         public bool TipoMulta {  get; set; }
 
         [Required]
-        public double Monto { get; set; }
+        public double Sancion { get; set; }
 
         [Required]
         public bool Estado {  get; set; }

@@ -34,12 +34,12 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="sancion" class="form-label">Sanción</label>
-                        <select asp-for="Multa.Monto" class="form-select">
+                        <select asp-for="Multa.Sancion" class="form-select">
                             <option disabled selected>Seleccione una sanción</option>
                             <option value="1">Boleta disciplinaria</option>
                             <option value="2">Cobro</option>
                         </select>
-                        <span asp-validation-for="Multa.Monto" class="text-danger"></span>
+                        <span asp-validation-for="Multa.Sancion" class="text-danger"></span>
                     </div>
                 </div>
 
