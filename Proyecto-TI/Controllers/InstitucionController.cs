@@ -49,6 +49,7 @@ namespace Proyecto_TI.Controllers
 
         // POST: Upsert
         [HttpPost]
+        [Route("Institucion/Upsert")]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Institucion institucion)
         {

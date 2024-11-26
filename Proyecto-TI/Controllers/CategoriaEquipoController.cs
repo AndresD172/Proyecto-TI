@@ -33,6 +33,7 @@ namespace Proyecto_TI.Controllers
 
         //POST UPSERT
         [HttpPost]
+        [Route("CategoriaEquipo/Upsert")]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(CategoriaEquipo categoriaEquipo)
         {
