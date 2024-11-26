@@ -3,6 +3,7 @@ using Modelos;
 using Microsoft.AspNetCore.Mvc;
 using Datos.Repositorio.IRepositorio;
 using Modelos.ViewModels;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Proyecto_TI.Controllers
 {
@@ -43,7 +44,7 @@ namespace Proyecto_TI.Controllers
                 {
                     return NotFound();
                 }
-                return View(especialidad);
+                return View("Editar", especialidad);
             }
         }
 
@@ -70,7 +71,7 @@ namespace Proyecto_TI.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(especialidad);
+            return View("Editar", especialidad);
         }
 
         [HttpPost]
