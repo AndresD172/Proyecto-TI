@@ -42,7 +42,7 @@ namespace Proyecto_TI.Controllers
                 {
                     return NotFound();
                 }
-                return View(seccion);
+                return View("Editar", seccion);
             }
         }
 
@@ -69,7 +69,7 @@ namespace Proyecto_TI.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(seccion);
+            return View("Editar", seccion);
         }
 
         [HttpPost]
@@ -95,7 +95,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            return View(seccion);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Eliminar

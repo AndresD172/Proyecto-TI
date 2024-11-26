@@ -28,9 +28,20 @@ namespace Proyecto_TI.Controllers
         //GET UPSERT
         public IActionResult Upsert(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return View(new CategoriaEquipo());
+            }
+            else
+            {
+                var categoriaEquipo = _categoriaEquipoRepositorio.Obtener(id.GetValueOrDefault());
+                if (categoriaEquipo == null)
+                {
+                    return NotFound();
+                }
+                return View("Editar", categoriaEquipo);
+            }
         }
-
         //POST UPSERT
         [HttpPost]
         [Route("CategoriaEquipo/Upsert")]
@@ -52,7 +63,7 @@ namespace Proyecto_TI.Controllers
                 _categoriaEquipoRepositorio.GuardarCambios();
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoriaEquipo);
+            return View("Editar", categoriaEquipo);
         }
 
         [HttpPost]
