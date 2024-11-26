@@ -1,5 +1,5 @@
-﻿@using Ferretero_Utilidades
-@model Ferretero_Models.Multa
+﻿@using Utilidades;
+@model Modelos.ViewModels.ViewModelMulta;
 
 @{
     var titulo = "¿Está seguro de eliminar esta multa?";
@@ -22,8 +22,8 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label asp-for="Multa.PrestamoId" class="form-label">Préstamo</label>
-                            <input asp-for="Multa.PrestamoId" class="form-control" disabled />
+                            <label asp-for="Multa.IdPrestamo" class="form-label">Préstamo</label>
+                            <input asp-for="Multa.IdPrestamo" class="form-control" disabled />
                         </div>
                     </div>
 
@@ -44,8 +44,8 @@
                             <input asp-for="Multa.Estado" class="form-control" disabled />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label asp-for="Multa.FechaEmision" class="form-label">Fecha de emisión</label>
-                            <input asp-for="Multa.FechaEmision" type="date" class="form-control" disabled />
+                            <label asp-for="Multa.FechaCreacion" class="form-label">Fecha de emisión</label>
+                            <input asp-for="Multa.FechaCreacion" type="date" class="form-control" disabled />
                         </div>
                     </div>
 
@@ -66,5 +66,5 @@
 </div>
 
 @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }
