@@ -31,7 +31,7 @@ namespace Datos.Repositorio
 
             return equiposDisponibles.Select(x => new SelectListItem
             {
-                Text = x.Marca + x.Modelo,
+                Text = x.Marca + " "+ x.Modelo,
                 Value = x.Id.ToString()
             });
         }
@@ -40,7 +40,7 @@ namespace Datos.Repositorio
         {
             return _context.Prestatarios.Select(x => new SelectListItem
             {
-                Text = x.Nombre + x.PrimerApellido + x.SegundoApellido,
+                Text = x.Nombre + " " + x.PrimerApellido + " " + x.SegundoApellido,
                 Value = x.Id.ToString()
             });
         }
