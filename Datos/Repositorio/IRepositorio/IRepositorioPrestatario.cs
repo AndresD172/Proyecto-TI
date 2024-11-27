@@ -12,8 +12,5 @@ namespace Datos.Repositorio.IRepositorio
     {
         void Actualizar(Prestatario prestatario);
 
-        IEnumerable<SelectListItem> ObtenerOpcionesSecciones();
-
-        IEnumerable<SelectListItem> ObtenerOpcionesEspecialidades();
     }
 }

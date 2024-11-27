@@ -1,5 +1,4 @@
 ﻿using Datos.Repositorio.IRepositorio;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -21,24 +20,6 @@ namespace Datos.Repositorio
         public void Actualizar(Prestatario prestatario)
         {
             _context.Update(prestatario);
-        }
-
-        public IEnumerable<SelectListItem> ObtenerOpcionesSecciones()
-        {
-            return _context.Secciones.Select(e => new SelectListItem
-            {
-                Text = e.NombreSeccion,
-                Value = e.IdSeccion.ToString(),
-            });
-        }
-
-        public IEnumerable<SelectListItem> ObtenerOpcionesEspecialidades()
-        {
-            return _context.Especialidades.Select(e => new SelectListItem
-            {
-                Text = e.NombreEspecialidad,
-                Value = e.IdEspecialidad.ToString(),
-            });
         }
     }
 }

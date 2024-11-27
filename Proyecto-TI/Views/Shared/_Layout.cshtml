@@ -10,7 +10,7 @@
     <link href="~/img/logo_ti_b.png" rel="icon" />
 </head>
 <body>
-    <nav class="navbar sticky-top">
+    <nav class="navbar fixed-top">
         <div class="container-fluid d-flex justify-content-between">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -80,9 +80,7 @@
                             <ul class="dropdown-menu m-nav">
                                 <li><a class="dropdown-item" asp-controller="Seccion" asp-action="Index"><h6>Sección</h6></a></li>
                                 <li><a class="dropdown-item" asp-controller="CategoriaEquipo" asp-action="Index"><h6>Categoria Equipo</h6></a></li>
-                                <li><a class="dropdown-item" asp-controller="Institucion" asp-action="Index"><h6>Institución</h6></a></li>
                                 <li><a class="dropdown-item" asp-controller="Especialidad" asp-action="Index"><h6>Especialidad</h6></a></li>
-                                <li><a class="dropdown-item" asp-controller="Departamento" asp-action="Index"><h6>Departamento</h6></a></li>
                                 <li><a class="dropdown-item" asp-controller="Login" asp-action="Index"><h6>Login</h6></a></li>
                                 <li><a class="dropdown-item" asp-controller="Register" asp-action="Index"><h6>Registrarse</h6></a></li>
                             </ul>
@@ -97,7 +95,7 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="footer fixed-bottom z-0">
+    <footer class="footer fixed-bottom">
         <div class="container-fluid d-flex justify-content-end align-items-center">
             <span class="text-white">
                 <h5>Soporte de Ti</h5>
