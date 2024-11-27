@@ -48,6 +48,19 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(CategoriaEquipo categoriaEquipo)
         {
+            var existe = _categoriaEquipoRepositorio.ObtenerTodos().Any(c => c.DescripcionEquipo.Equals(categoriaEquipo.DescripcionEquipo, StringComparison.OrdinalIgnoreCase) && c.Id != categoriaEquipo.Id);
+
+            if (existe)
+            {
+                ModelState.AddModelError("categoriaEquipo.DescripcionEquipo", "El nombre de la categoria ya existe.");
+                var viewModel = new ViewModelCategoriaEquipo
+                {
+                    categoriaEquipo = categoriaEquipo,
+                    listaCategoriasEquipos = _categoriaEquipoRepositorio.ObtenerTodos().ToList()
+                };
+                return View("Index", viewModel);
+            }
+
             if (ModelState.IsValid)
             {
                 //Nuevo
