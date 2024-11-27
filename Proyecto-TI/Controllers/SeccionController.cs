@@ -52,6 +52,18 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Seccion seccion)
         {
+            var existe = _seccionRepositorio.ObtenerTodos().Any(s => s.NombreSeccion.Equals(seccion.NombreSeccion, StringComparison.OrdinalIgnoreCase) && s.IdSeccion != seccion.IdSeccion);
+
+            if (existe)
+            {
+               ModelState.AddModelError("seccion.NombreSeccion", "El nombre de la sección ya existe.");
+               var viewModel = new ViewModelSeccion
+               {
+                   seccion = seccion,
+                   listaSecciones = _seccionRepositorio.ObtenerTodos().ToList()
+               };
+                return View("Index", viewModel);
+            }
             if (ModelState.IsValid)
             {
                 // Nuevo registro

@@ -54,6 +54,19 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Departamento departamento)
         {
+            var existe = _departamentoRepositorio.ObtenerTodos().Any(d => d.NombreDepartamento.Equals(departamento.NombreDepartamento, StringComparison.OrdinalIgnoreCase) && d.IdDepartamento != departamento.IdDepartamento);
+
+            if (existe)
+            {
+                ModelState.AddModelError("departamento.NombreDepartamento", "El nombre del departamento ya existe.");
+                var viewModel = new ViewModelDepartamento
+                {
+                    departamento = departamento,
+                    listaDepartamentos = _departamentoRepositorio.ObtenerTodos().ToList()
+                };
+                return View("Index", viewModel);
+            }
+
             if (ModelState.IsValid)
             {
                 // Nuevo registro

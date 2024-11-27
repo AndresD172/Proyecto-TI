@@ -16,6 +16,7 @@
             <div class="row justify-content-center">
                 <div class="col-7 align-items-center">
                     <input asp-for="departamento.NombreDepartamento" type="text" class="form-control rounded-pill" placeholder="Agregar departamento" aria-label="Agregar departamento">
+                        <span asp-validation-for="departamento.NombreDepartamento" class="text-danger"></span>
                 </div>
                 <br>
                 <br>

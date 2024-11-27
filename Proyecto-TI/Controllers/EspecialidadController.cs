@@ -54,6 +54,19 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Especialidad especialidad)
         {
+            var existe = _especialidadRepositorio.ObtenerTodos().Any(e => e.NombreEspecialidad.Equals(especialidad.NombreEspecialidad, StringComparison.OrdinalIgnoreCase) && e.IdEspecialidad != especialidad.IdEspecialidad);
+
+            if (existe)
+            {
+                ModelState.AddModelError("especialidad.NombreEspecialidad", "El nombre de la especialidad ya existe.");
+                var viewModel = new ViewModelEspecialidad
+                {
+                    especialidad = especialidad,
+                    listaEspecialidades = _especialidadRepositorio.ObtenerTodos().ToList()
+                };
+                return View("Index", viewModel);
+            }
+
             if (ModelState.IsValid)
             {
                 // Nuevo registro

@@ -20,6 +20,8 @@
                     <div class="col-7 align-items-center">
                         <!--AGREGAR-->
                         <input asp-for="seccion.NombreSeccion" type="text" class="form-control rounded-pill" placeholder="Agregar sección" aria-label="Agregar seccion">
+                        <span asp-validation-for="seccion.NombreSeccion" class="text-danger"></span>
+
                     </div>
                     <br>
                     <br>
