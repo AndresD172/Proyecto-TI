@@ -54,7 +54,7 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Especialidad especialidad)
         {
-            var existe = _especialidadRepositorio.ObtenerTodos().Any(e => e.NombreEspecialidad.Equals(especialidad.NombreEspecialidad, StringComparison.OrdinalIgnoreCase) && e.IdEspecialidad != especialidad.IdEspecialidad);
+            var existe = _especialidadRepositorio.ObtenerTodos(seguirCambios: false).Any(e => e.NombreEspecialidad.Equals(especialidad.NombreEspecialidad, StringComparison.OrdinalIgnoreCase) && e.IdEspecialidad != especialidad.IdEspecialidad);
 
             if (existe)
             {
