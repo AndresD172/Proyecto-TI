@@ -54,6 +54,20 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Institucion institucion)
         {
+
+            var existe = _institucionRepositorio.ObtenerTodos().Any(i => i.NombreInstitucion.Equals(institucion.NombreInstitucion, StringComparison.OrdinalIgnoreCase) && i.IdInstitucion != institucion.IdInstitucion);
+
+            if (existe)
+            {
+                ModelState.AddModelError("institucion.NombreInstitucion", "El nombre de la institución ya existe.");
+                var viewModel = new ViewModelInstitucion
+                {
+                    institucion = institucion,
+                    listaInstituciones = _institucionRepositorio.ObtenerTodos().ToList()
+                };
+                return View("Index", viewModel);
+            }
+
             if (ModelState.IsValid)
             {
                 // Nuevo registro
