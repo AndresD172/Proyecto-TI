@@ -19,11 +19,7 @@ namespace Datos.Repositorio
 
         public void Actualizar(CategoriaEquipo categoriaEquipo)
         {
-            var categoriaEquipoAnterior = _db.CategoriasEquipos.FirstOrDefault(c => c.Id == categoriaEquipo.Id);
-            if (categoriaEquipoAnterior != null)
-            {
-                categoriaEquipoAnterior.DescripcionEquipo = categoriaEquipo.DescripcionEquipo;
-            }
+            _db.Update(categoriaEquipo);
         }
 
     }

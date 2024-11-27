@@ -13,5 +13,7 @@ namespace Datos.Repositorio.IRepositorio
         void Actualizar(Prestamo prestamo);
 
         IEnumerable<SelectListItem> ObtenerOpcionesEquipos();
+        
+        IEnumerable<SelectListItem> ObtenerOpcionesPrestatarios();
     }
 }

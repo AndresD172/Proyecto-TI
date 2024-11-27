@@ -19,13 +19,7 @@ namespace Datos.Repositorio
 
         public void Actualizar(Especialidad especialidad)
         {
-            var especialidadAnterior = _db.Especialidades.FirstOrDefault(e => e.Id == especialidad.IdEspecialidad);
-            if (especialidadAnterior != null)
-            {
-
-                especialidadAnterior.Nombre = especialidad.NombreEspecialidad;
-
-            }
+            _db.Update(especialidad);
         }
     }
 }

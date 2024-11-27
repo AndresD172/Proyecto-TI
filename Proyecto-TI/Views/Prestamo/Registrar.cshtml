@@ -1,0 +1,59 @@
+﻿@model Modelos.ViewModels.ViewModelPrestamo
+
+<div class="container adjust">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2 class="titulo">Nuevo Préstamo</h2>
+    </div>
+  </div>
+  <form method="post" asp-action="Registrar">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <form>
+              <div class="mt-4">
+                <label class="form-label" for="Prestatario">Prestatario</label>
+                <select asp-for="Prestamo.IdPrestatario" asp-items="@Model.Prestatarios" class="form-select mb-3" id="Prestatario">
+                  <option selected disabled="Prestatario">Seleccione un prestatario</option>
+                </select>
+              </div>
+              <div class="mt-5">
+                <label class="form-label" for="Equipo">Equipo</label>
+                <select asp-for="Prestamo.Equipos" asp-items="@Model.Equipos" class="form-select mb-3" id="Equipo">
+                  <option selected disabled="Equipo">Seleccione un equipo</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="mt-4">
+              <label class="form-label" for="FechaPrestamo">Fecha de prestamo</label>
+              <input asp-for="Prestamo.FechaPrestamo" id="FechaPrestamo" class="form-control" type="date" aria-describedby="FechaPrestamo">
+            </div>
+            <div class="mt-5">
+              <label class="form-label" for="FechaDevolucion">Fecha de devolución</label>
+              <input asp-for="Prestamo.FechaDevolucion" id="FechaDevolucion" class="form-control" type="date" aria-describedby="FechaDevolucion">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mt-4">
+              <label class="form-label" for="Descripcion">Descripción</label>
+              <textarea asp-for="Prestamo.Descripcion" id="Descripcion" class="form-control tamano" type="text" aria-describedby="Descripcion" placeholder="Escriba la descripción"></textarea>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="d-flex botones-m">
+              <button type="submit" class="btn btn-color-editar btn-md ms-2 btn-color-editar:hover">
+                Aceptar
+              </button>
+              <button asp-controller="Prestamo" asp-action="Registrar" class="btn btn-color-eliminar btn-md ms-2 btn-color-eliminar:hover">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -27,6 +27,9 @@ namespace Modelos
         public DateOnly FechaDevolucion { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
+        public string Descripcion { get; set; }
+
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int EstadoPrestamo { get; set; }
 
         public bool Estado { get; set; }

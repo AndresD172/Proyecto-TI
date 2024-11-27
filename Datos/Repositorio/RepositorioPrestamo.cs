@@ -25,9 +25,22 @@ namespace Datos.Repositorio
 
         public IEnumerable<SelectListItem> ObtenerOpcionesEquipos()
         {
-            return _context.Equipos.Select(x => new SelectListItem
+            IEnumerable<Equipo> equipos = _context.Equipos.AsEnumerable();
+            
+            IEnumerable<Equipo> equiposDisponibles = equipos.Where(x => x.EstadoEquipo.Equals("Disponible"));
+
+            return equiposDisponibles.Select(x => new SelectListItem
             {
                 Text = x.Marca + x.Modelo,
+                Value = x.Id.ToString()
+            });
+        }
+
+        public IEnumerable<SelectListItem> ObtenerOpcionesPrestatarios()
+        {
+            return _context.Prestatarios.Select(x => new SelectListItem
+            {
+                Text = x.Nombre + x.PrimerApellido + x.SegundoApellido,
                 Value = x.Id.ToString()
             });
         }

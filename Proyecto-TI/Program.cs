@@ -25,6 +25,8 @@ builder.Services.AddSendGrid(options =>
 
 builder.Services.AddScoped<IRepositorioInstitucion, RepositorioInstitucion>();
 builder.Services.AddScoped<IRepositorioPrestamo, RepositorioPrestamo>();
+builder.Services.AddScoped<IRepositorioPrestatario, RepositorioPrestatario>();
+builder.Services.AddScoped<IRepositorioEquipo, RepositorioEquipo>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 var app = builder.Build();

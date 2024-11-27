@@ -8,72 +8,105 @@ namespace Proyecto_TI.Controllers
 {
     public class PrestamoController : Controller
     {
-        private readonly IRepositorioPrestamo _repositorio;
+        private readonly IRepositorioPrestamo _repositorioPrestamo;
+        private readonly IRepositorioEquipo _repositorioEquipo;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public PrestamoController(IRepositorioPrestamo repositorioPrestamo, UserManager<IdentityUser> userManager)
+        public PrestamoController(IRepositorioPrestamo repositorioPrestamo, IRepositorioEquipo repositorioEquipo, UserManager<IdentityUser> userManager)
         {
-            _repositorio = repositorioPrestamo;
+            _repositorioPrestamo = repositorioPrestamo;
+            _repositorioEquipo = repositorioEquipo;
             _userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Prestamo> prestamos = _repositorio.ObtenerTodos(propiedadesAIncluir: ["Equipos", "Prestatario", "Tecnico"]);
+            IEnumerable<Prestamo> prestamos = _repositorioPrestamo.ObtenerTodos(propiedadesAIncluir: ["Equipos", "Prestatario", "Tecnico"]);
+            
             return View(prestamos);
         }
 
-        public IActionResult Upsert(int? id)
+        public IActionResult Registrar()
         {
             ViewModelPrestamo viewModelPrestamo = new ViewModelPrestamo
             {
                 Prestamo = new Prestamo(),
-                Equipos = _repositorio.ObtenerOpcionesEquipos()
+                Equipos = _repositorioPrestamo.ObtenerOpcionesEquipos(),
+                Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
             };
-
-            if (id == null)
-            {
-                return View(viewModelPrestamo);
-            }
-            else
-            {
-                viewModelPrestamo.Prestamo = _repositorio.Obtener(id);
-                if (viewModelPrestamo.Prestamo == null)
-                {
-                    return NotFound();
-                }
-            }
 
             return View(viewModelPrestamo);
         }
 
-        [ValidateAntiForgeryToken, HttpPost]
-        public async Task<IActionResult> Upsert(ViewModelPrestamo viewModelPrestamo)
+        [HttpPost, AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Registrar(ViewModelPrestamo viewModel)
         {
             if (!ModelState.IsValid)
             {
-                // Reinicia la lista de equipos del préstamo.
-                viewModelPrestamo.Equipos = _repositorio.ObtenerOpcionesEquipos();
+                ViewModelPrestamo viewModelPrestamo = new ViewModelPrestamo
+                {
+                    Prestamo = viewModel.Prestamo,
+                    Equipos = _repositorioPrestamo.ObtenerOpcionesEquipos(),
+                    Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
+                };
+
                 return View(viewModelPrestamo);
             }
 
-            int id = viewModelPrestamo.Prestamo.Id;
-            if (id == 0)
-            {
-                // Obtiene el usuario actual basado en sus claims.
-                IdentityUser? user = await _userManager.GetUserAsync(User);
-                viewModelPrestamo.Prestamo.IdTecnico = user.Id;
+            // Obtiene la lista de equipos y cambia el estado de los equipos a prestar.
+            IEnumerable<Equipo> equipos = _repositorioEquipo.ObtenerTodos().Where(x => viewModel.Prestamo.Equipos.Contains(x));
 
-                _repositorio.Agregar(viewModelPrestamo.Prestamo);
-            }
-            else
+            foreach (Equipo equipo in equipos)
             {
-                _repositorio.Actualizar(viewModelPrestamo.Prestamo);
+                equipo.EstadoEquipo = "En préstamo";
             }
 
-            _repositorio.GuardarCambios();
+            _repositorioEquipo.GuardarCambios();
 
-            return RedirectToAction("Index");
+            // Obtiene el usuario actual basado en sus claims.
+            IdentityUser? user = await _userManager.GetUserAsync(User);
+            viewModel.Prestamo.IdTecnico = user.Id;
+
+            // Guarda el préstamo.
+            _repositorioPrestamo.Agregar(viewModel.Prestamo);
+
+            _repositorioPrestamo.GuardarCambios();
+
+            return View("Index");
+        }
+
+        public IActionResult Actualizar(int? id)
+        {
+            Prestamo prestamo = _repositorioPrestamo.Obtener(id);
+
+            if (prestamo == null)
+            {
+                return NotFound();
+            }
+
+            ViewModelPrestamo viewModelPrestamo = new ViewModelPrestamo
+            {
+                Prestamo = prestamo,
+                Equipos = _repositorioPrestamo.ObtenerOpcionesEquipos(),
+                Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
+            };
+
+            return View(viewModelPrestamo);
+        }
+
+        [HttpPost, AutoValidateAntiforgeryToken]
+        public IActionResult Actualizar(ViewModelPrestamo viewModel)
+        {
+            _repositorioPrestamo.Actualizar(viewModel.Prestamo);
+            _repositorioPrestamo.GuardarCambios();
+
+            return View("Index");
+        }
+
+        public IActionResult Buscar(string query)
+        {
+            IEnumerable<Prestamo> prestamos = _repositorioPrestamo.ObtenerTodos(x => x.Prestatario.Identificacion.ToLower().Equals(query.ToLower()));
+            return View("Index", prestamos);
         }
 
         public IActionResult Eliminar(int? id)
@@ -83,7 +116,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            Prestamo? prestamo = _repositorio.Obtener(id);
+            Prestamo? prestamo = _repositorioPrestamo.Obtener(id);
 
             if (prestamo == null)
             {
@@ -101,8 +134,8 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            _repositorio.Remover(prestamo);
-            _repositorio.GuardarCambios();
+            _repositorioPrestamo.Remover(prestamo);
+            _repositorioPrestamo.GuardarCambios();
 
             return RedirectToAction("Index");
         }

@@ -33,4 +33,11 @@
     <ProjectReference Include="..\Utilidades\Utilidades.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Prestamo\Actualizar.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

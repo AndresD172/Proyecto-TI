@@ -8,7 +8,7 @@ namespace Datos
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<CategoriaEquipo> CategoriaEquipos { get; set; }
@@ -17,7 +17,6 @@ namespace Datos
         public DbSet<Especialidad> Especialidades { get; set; }
         public DbSet<Institucion> Instituciones { get; set; }
         public DbSet<Prestamo> Prestamos { get; set; }
-        public DbSet<Equipo> Equipos {  get; set; }  
         public DbSet<Multa> Multas { get; set; }
         public DbSet<Reporte> Reportes { get; set; }
         public DbSet<Prestatario> Prestatarios { get; set; }
