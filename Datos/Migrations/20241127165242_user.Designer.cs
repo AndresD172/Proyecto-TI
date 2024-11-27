@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127075205_pls")]
-    partial class pls
+    [Migration("20241127165242_user")]
+    partial class user
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,6 +104,11 @@ namespace Datos.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -155,6 +160,10 @@ namespace Datos.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -286,9 +295,6 @@ namespace Datos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoriaEquipoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -297,7 +303,6 @@ namespace Datos.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("EstadoEquipo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdCategoriaEquipo")
@@ -317,7 +322,7 @@ namespace Datos.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriaEquipoId");
+                    b.HasIndex("IdCategoriaEquipo");
 
                     b.ToTable("Equipos");
                 });
@@ -431,7 +436,6 @@ namespace Datos.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IdTecnico")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -591,6 +595,19 @@ namespace Datos.Migrations
                     b.ToTable("TipoPrestatarios");
                 });
 
+            modelBuilder.Entity("Modelos.Usuario", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Apellido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Usuario");
+                });
+
             modelBuilder.Entity("EquipoPrestamo", b =>
                 {
                     b.HasOne("Modelos.Equipo", null)
@@ -661,7 +678,9 @@ namespace Datos.Migrations
                 {
                     b.HasOne("Modelos.CategoriaEquipo", "CategoriaEquipo")
                         .WithMany()
-                        .HasForeignKey("CategoriaEquipoId");
+                        .HasForeignKey("IdCategoriaEquipo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CategoriaEquipo");
                 });
@@ -683,11 +702,9 @@ namespace Datos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Tecnico")
+                    b.HasOne("Modelos.Usuario", "Tecnico")
                         .WithMany()
-                        .HasForeignKey("IdTecnico")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdTecnico");
 
                     b.Navigation("Prestatario");
 

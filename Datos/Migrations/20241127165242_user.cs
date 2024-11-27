@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Datos.Migrations
 {
     /// <inheritdoc />
-    public partial class pls : Migration
+    public partial class user : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,9 @@ namespace Datos.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -251,19 +254,19 @@ namespace Datos.Migrations
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NumeroSerie = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EstadoEquipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EstadoEquipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCategoriaEquipo = table.Column<int>(type: "int", nullable: false),
-                    CategoriaEquipoId = table.Column<int>(type: "int", nullable: true),
                     Estado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Equipos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Equipos_CategoriaEquipos_CategoriaEquipoId",
-                        column: x => x.CategoriaEquipoId,
+                        name: "FK_Equipos_CategoriaEquipos_IdCategoriaEquipo",
+                        column: x => x.IdCategoriaEquipo,
                         principalTable: "CategoriaEquipos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -305,7 +308,7 @@ namespace Datos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTecnico = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IdTecnico = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IdPrestatario = table.Column<int>(type: "int", nullable: false),
                     FechaPrestamo = table.Column<DateOnly>(type: "date", nullable: false),
                     FechaDevolucion = table.Column<DateOnly>(type: "date", nullable: false),
@@ -320,8 +323,7 @@ namespace Datos.Migrations
                         name: "FK_Prestamos_AspNetUsers_IdTecnico",
                         column: x => x.IdTecnico,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Prestamos_Prestatarios_IdPrestatario",
                         column: x => x.IdPrestatario,
@@ -472,9 +474,9 @@ namespace Datos.Migrations
                 column: "PrestamosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Equipos_CategoriaEquipoId",
+                name: "IX_Equipos_IdCategoriaEquipo",
                 table: "Equipos",
-                column: "CategoriaEquipoId");
+                column: "IdCategoriaEquipo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Multas_PrestamoId",

@@ -101,6 +101,11 @@ namespace Datos.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -152,6 +157,10 @@ namespace Datos.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -291,7 +300,6 @@ namespace Datos.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("EstadoEquipo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdCategoriaEquipo")
@@ -425,7 +433,6 @@ namespace Datos.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IdTecnico")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -585,6 +592,19 @@ namespace Datos.Migrations
                     b.ToTable("TipoPrestatarios");
                 });
 
+            modelBuilder.Entity("Modelos.Usuario", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Apellido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Usuario");
+                });
+
             modelBuilder.Entity("EquipoPrestamo", b =>
                 {
                     b.HasOne("Modelos.Equipo", null)
@@ -679,11 +699,9 @@ namespace Datos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Tecnico")
+                    b.HasOne("Modelos.Usuario", "Tecnico")
                         .WithMany()
-                        .HasForeignKey("IdTecnico")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdTecnico");
 
                     b.Navigation("Prestatario");
 

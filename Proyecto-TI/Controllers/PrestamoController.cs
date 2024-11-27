@@ -11,9 +11,9 @@ namespace Proyecto_TI.Controllers
     {
         private readonly IRepositorioPrestamo _repositorioPrestamo;
         private readonly IRepositorioEquipo _repositorioEquipo;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<Usuario> _userManager;
 
-        public PrestamoController(IRepositorioPrestamo repositorioPrestamo, IRepositorioEquipo repositorioEquipo, UserManager<IdentityUser> userManager)
+        public PrestamoController(IRepositorioPrestamo repositorioPrestamo, IRepositorioEquipo repositorioEquipo, UserManager<Usuario> userManager)
         {
             _repositorioPrestamo = repositorioPrestamo;
             _repositorioEquipo = repositorioEquipo;
