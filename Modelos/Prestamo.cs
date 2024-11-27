@@ -18,15 +18,16 @@ namespace Modelos
         public int IdPrestatario { get; set; }
         public virtual Prestatario? Prestatario { get; set; }
 
+
         public virtual ICollection<Equipo> Equipos { get; set; } = new List<Equipo>();
 
-        [Required(ErrorMessage = "Campo obligatorio.")]
+        [Required]
         public DateOnly FechaPrestamo { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
+        [Required]
         public DateOnly FechaDevolucion { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
+        [Required]
         public int EstadoPrestamo { get; set; }
 
         public bool Estado { get; set; }
