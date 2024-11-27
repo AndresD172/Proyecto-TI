@@ -1,91 +1,103 @@
 @charset "UTF-8";
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;  
+@media (min-width: 768px) {
+    .cards {
+        width: 79%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .cards {
+        width: 100%;
+        margin: 20px !important;
+    }
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;  /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
 }
 
 .navbar {
-  background-color: #144B7C;
+    background-color: #144B7C;
 }
 
-.navbar .nav-item {
-  display: inline-block;
-  margin-right: 2px;
-}
+    .navbar .nav-item {
+        display: inline-block;
+        margin-right: 2px;
+    }
 
 .offcanvas-body {
-  background-color: #144B7C;
+    background-color: #144B7C;
 }
 
 .offcanvas-header {
-  background-color: #144B7C;
+    background-color: #144B7C;
 }
 
 .dropdown-menu {
-  background-color: #144B7C !important;  /* Forzamos el color de fondo */
-  border-color: transparent !important;  /* Removemos el borde */
+    background-color: #144B7C !important; /* Forzamos el color de fondo */
+    border-color: transparent !important; /* Removemos el borde */
 }
 
 .dropdown-item {
-  color: white !important;
+    color: white !important;
 }
 
-.dropdown-item:hover {
-  background-color: #0D3657 !important;
-  color: white !important;
-}
+    .dropdown-item:hover {
+        background-color: #0D3657 !important;
+        color: white !important;
+    }
 
 .navbar-toggler-icon {
-  filter: brightness(0) invert(1); /* Cambia el ícono a blanco */
+    filter: brightness(0) invert(1); /* Cambia el ícono a blanco */
 }
 
 .nav-item.custom-divider {
-  border-bottom: 2px solid white;
-  padding-bottom: 0.5rem;
+    border-bottom: 2px solid white;
+    padding-bottom: 0.5rem;
 }
 
 .footer {
-  background-color: #144B7C;
-  padding: 10px 0;
+    background-color: #144B7C;
+    padding: 10px 0;
+    .text-white
 
-  .text-white {
+{
     color: white;
-  }
-
-  .vertical-line {
-    border-left: 2px solid white;  
-    height: 20px; 
-  }
-
-}
-.btn{
-  background-color: #144B7C;
-  border-radius: 10px;
 }
 
-.adjust{
-  margin-top: 100px !important;
-  margin-bottom: 15px !important;
+.vertical-line {
+    border-left: 2px solid white;
+    height: 20px;
+}
+
+}
+
+.btn {
+    background-color: #144B7C;
+    border-radius: 10px;
+}
+
+.adjust {
+    margin-top: 100px !important;
+    margin-bottom: 15px !important;
 }
 
 .search-bar {
-  display: flex;
+    display: flex;
+    .form-control
 
-  .form-control {
+{
     border-radius: 20px;
     padding-left: 15px;
     flex-grow: 1;
-  }
+}
 
-  .agregar-btn {
+.agregar-btn {
     border-radius: 20px;
     padding: 5px 15px;
     margin-left: 10px;
@@ -93,94 +105,215 @@ body {
     align-items: center;
     background-color: #1E73BE;
     color: white;
+    .plus-icon
 
-    .plus-icon {
-      font-size: 1.2rem;
-      margin-left: 5px;
-    }
-  }
+{
+    font-size: 1.2rem;
+    margin-left: 5px;
 }
 
-.col-12{
-  margin-bottom: 4px;
+}
 }
 
-.header-inactivo{
-  background-color: #144B7C !important;
+.col-12 {
+    margin-bottom: 4px;
 }
 
-.header-activo{
-  background-color: #1E73BE !important;
+.header-inactivo {
+    background-color: #144B7C !important;
 }
 
-.card{
-  margin-top: 25px;
+.header-activo {
+    background-color: #1E73BE !important;
 }
 
-.card-text{
-  margin: 4px !important;
-  font-size: large !important;
+.card {
+    margin-top: 25px;
+    margin: 0px !important;
 }
 
-.btn-estado{
-  background-color: white !important;
-  border: solid;
-  border-radius: 10px !important;
+.card-text {
+    margin: 4px !important;
+    font-size: large !important;
+}
+
+.btn-estado {
+    background-color: white !important;
+    border: solid;
+    border-radius: 10px !important;
 }
 
 .footer {
-  display: flex;
-  justify-content: flex-end; /* Alinea el contenido hacia la derecha */
-  align-items: center;
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido hacia la derecha */
+    align-items: center;
 }
 
-.margin-l{
-  margin-right: 10px !important;
+.margin-l {
+    margin-right: 10px !important;
 }
 
-.btn-color-editar{
-  background-color: #1E73BE !important;
-  color: white !important;
-  border-radius: 25px !important;
+.btn-color-editar {
+    background-color: #1E73BE !important;
+    color: white !important;
+    border-radius: 25px !important;
 }
 
-.btn-color-eliminar{
-  background-color: white !important;
-  border: 2px solid #1E73BE !important;  /* Reduce el grosor del borde */
-  color: black !important;
-  border-radius: 25px !important;
+.btn-color-eliminar {
+    background-color: white !important;
+    border: 2px solid #1E73BE !important; /* Reduce el grosor del borde */
+    color: black !important;
+    border-radius: 25px !important;
 }
 
-.margen{
-  margin-right: 3px !important;
+.margen {
+    margin-right: 3px !important;
 }
 
-.card-footer{
-  background-color: transparent !important;
-}
-.titulo{
-  color: #144B7C;
+.card-footer {
+    background-color: transparent !important;
 }
 
-.tamano{
-  height: 150px !important;
-  width: 100% !important;
-
+.titulo {
+    color: #144B7C;
 }
 
-.botones-m{
-  margin-left: 900px !important;
+.tamano {
+    height: 150px !important;
+    width: 100% !important;
+}
+
+.botones-m {
+    margin-left: 500px !important;
 }
 
 .btn-color-editar:hover {
-  background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
+    background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
 }
 
 .btn-color-eliminar:hover {
-  background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
-  color: white !important; /* Cambia el texto a blanco */
-  border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
+    background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
+    color: white !important; /* Cambia el texto a blanco */
+    border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
 }
+
+.links {
+    text-decoration: none !important;
+}
+
+.decoracion {
+    text-decoration: none !important;
+    color: #000 !important;
+}
+
+.decoracionaceptar {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.btn-color-actualizar {
+    background-color: #1E73BE !important;
+    color: white !important;
+    border-radius: 25px !important;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+    /* Estilo para el hover del botón de editar */
+    .btn-color-actualizar:hover {
+        background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
+    }
+
+/* Estilo para el botón de eliminar */
+.btn-color-cancelar {
+    background-color: white !important;
+    border: 2px solid #1E73BE !important; /* Reduce el grosor del borde */
+    color: black !important;
+    border-radius: 25px !important;
+    transition: all 0.3s ease; /* Transición suave para color y bordes */
+}
+
+    /* Estilo para el hover del botón de eliminar */
+    .btn-color-cancelar:hover {
+        background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
+        color: white !important; /* Cambia el texto a blanco */
+        border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
+    }
+
+.margin-card {
+    margin-bottom: 100px !important;
+}
+
+.centrar {
+    justify-content: center !important;
+    align-content: center !important;
+    align-items: center !important;
+}
+
+.btn-color-aceptar {
+    background-color: #1E73BE !important;
+    color: white !important;
+    border-radius: 25px !important;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+    /* Estilo para el hover del botón de editar */
+    .btn-color-aceptar:hover {
+        background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
+    }
+
+/* Estilo para el botón de eliminar */
+.btn-color-salir {
+    background-color: white !important;
+    border: 2px solid #1E73BE !important; /* Reduce el grosor del borde */
+    color: black !important;
+    border-radius: 15px !important;
+    transition: all 0.3s ease; /* Transición suave para color y bordes */
+}
+
+    /* Estilo para el hover del botón de eliminar */
+    .btn-color-salir:hover {
+        background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
+        color: white !important; /* Cambia el texto a blanco */
+        border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
+    }
+
+.btn-inicio {
+    background-color: #1E73BE !important;
+    color: white !important;
+}
+
+.btn-inicio-hover:hover {
+    background-color: #175994 !important;
+    color: white !important;
+}
+
+
+.margin-nav {
+    margin-top: 150px !important;
+}
+
+
+.card-home {
+    width: 100% !important;
+}
+
+@media (min-width: 768px) {
+    .margin-nav {
+        margin-top: 250px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .m-nav {
+        margin-bottom: 100px !important;
+    }
+}
+
+/*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
 
 /*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
