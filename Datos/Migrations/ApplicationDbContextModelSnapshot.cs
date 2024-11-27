@@ -293,9 +293,8 @@ namespace Datos.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("EstadoEquipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("EstadoEquipo")
+                        .HasColumnType("bit");
 
                     b.Property<int>("IdCategoriaEquipo")
                         .HasColumnType("int");
@@ -407,6 +406,10 @@ namespace Datos.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");

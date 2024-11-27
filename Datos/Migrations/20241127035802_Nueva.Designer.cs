@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127022152_im-panicking-rn")]
-    partial class impanickingrn
+    [Migration("20241127035802_Nueva")]
+    partial class Nueva
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -296,9 +296,8 @@ namespace Datos.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("EstadoEquipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("EstadoEquipo")
+                        .HasColumnType("bit");
 
                     b.Property<int>("IdCategoriaEquipo")
                         .HasColumnType("int");
@@ -389,6 +388,9 @@ namespace Datos.Migrations
 
                     b.Property<int?>("PrestamoId")
                         .HasColumnType("int");
+
+                    b.Property<double>("Sancion")
+                        .HasColumnType("float");
 
                     b.Property<bool>("TipoMulta")
                         .HasColumnType("bit");

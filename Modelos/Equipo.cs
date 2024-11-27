@@ -25,7 +25,7 @@ namespace Modelos
         public string Descripcion { get; set; }
 
         [Required]
-        public string EstadoEquipo { get; set; }
+        public bool EstadoEquipo { get; set; }
 
         [ForeignKey("IdCategoriaEquipo")]
         public int IdCategoriaEquipo { get; set; }

@@ -32,7 +32,7 @@ namespace Proyecto_TI.Controllers
             {
                 Prestamo = new Prestamo(),
                 Equipos = _repositorioPrestamo.ObtenerOpcionesEquipos(),
-                Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
+               // Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
             };
 
             return View(viewModelPrestamo);
@@ -47,7 +47,7 @@ namespace Proyecto_TI.Controllers
                 {
                     Prestamo = viewModel.Prestamo,
                     Equipos = _repositorioPrestamo.ObtenerOpcionesEquipos(),
-                    Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
+                  //  Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
                 };
 
                 return View(viewModelPrestamo);
@@ -58,7 +58,7 @@ namespace Proyecto_TI.Controllers
 
             foreach (Equipo equipo in equipos)
             {
-                equipo.EstadoEquipo = "En préstamo";
+                //equipo.EstadoEquipo = "En préstamo";
             }
 
             _repositorioEquipo.GuardarCambios();
@@ -88,7 +88,7 @@ namespace Proyecto_TI.Controllers
             {
                 Prestamo = prestamo,
                 Equipos = _repositorioPrestamo.ObtenerOpcionesEquipos(),
-                Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
+                //Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
             };
 
             return View(viewModelPrestamo);

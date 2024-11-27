@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Datos.Migrations
 {
     /// <inheritdoc />
-    public partial class impanickingrn : Migration
+    public partial class Nueva : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -269,7 +269,7 @@ namespace Datos.Migrations
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NumeroSerie = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EstadoEquipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EstadoEquipo = table.Column<bool>(type: "bit", nullable: false),
                     IdCategoriaEquipo = table.Column<int>(type: "int", nullable: false),
                     CategoriaEquipoId = table.Column<int>(type: "int", nullable: true),
                     Estado = table.Column<bool>(type: "bit", nullable: false)
@@ -397,6 +397,7 @@ namespace Datos.Migrations
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EstadoMulta = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TipoMulta = table.Column<bool>(type: "bit", nullable: false),
+                    Sancion = table.Column<double>(type: "float", nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
                     IdPrestamo = table.Column<int>(type: "int", nullable: false),
                     PrestamoId = table.Column<int>(type: "int", nullable: true)
