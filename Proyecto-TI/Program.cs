@@ -31,6 +31,8 @@ builder.Services.AddScoped<IRepositorioDepartamento, RepositorioDepartamento>();
 builder.Services.AddScoped<IRepositorioInstitucion, RepositorioInstitucion>();
 builder.Services.AddScoped<IRepositorioCategoriaEquipo, RepositorioCategoriaEquipo>();
 builder.Services.AddScoped<IRepositorioEspecialidad, RepositorioEspecialidad>();
+builder.Services.AddScoped<IRepositorioEquipo, RepositorioEquipo>();
+builder.Services.AddScoped<IRepositorioPrestatario, RepositorioPrestatario>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 var app = builder.Build();

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Datos.Migrations
 {
     /// <inheritdoc />
-    public partial class impanickingrn : Migration
+    public partial class pls : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,24 +104,6 @@ namespace Datos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Instituciones", x => x.IdInstitucion);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Prestatarios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PrimerApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SegundoApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Identificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Estado = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Prestatarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -285,6 +267,39 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Prestatarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PrimerApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SegundoApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Identificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoPrestatario = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdSeccion = table.Column<int>(type: "int", nullable: false),
+                    IdEspecialidad = table.Column<int>(type: "int", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prestatarios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Prestatarios_Especialidades_IdEspecialidad",
+                        column: x => x.IdEspecialidad,
+                        principalTable: "Especialidades",
+                        principalColumn: "IdEspecialidad",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Prestatarios_Secciones_IdSeccion",
+                        column: x => x.IdSeccion,
+                        principalTable: "Secciones",
+                        principalColumn: "IdSeccion",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Prestamos",
                 columns: table => new
                 {
@@ -397,6 +412,7 @@ namespace Datos.Migrations
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EstadoMulta = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TipoMulta = table.Column<bool>(type: "bit", nullable: false),
+                    Sancion = table.Column<double>(type: "float", nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
                     IdPrestamo = table.Column<int>(type: "int", nullable: false),
                     PrestamoId = table.Column<int>(type: "int", nullable: true)
@@ -476,6 +492,16 @@ namespace Datos.Migrations
                 column: "IdTecnico");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Prestatarios_IdEspecialidad",
+                table: "Prestatarios",
+                column: "IdEspecialidad");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prestatarios_IdSeccion",
+                table: "Prestatarios",
+                column: "IdSeccion");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TipoPrestatarios_DepartamentoIdDepartamento",
                 table: "TipoPrestatarios",
                 column: "DepartamentoIdDepartamento");
@@ -544,13 +570,7 @@ namespace Datos.Migrations
                 name: "Departamentos");
 
             migrationBuilder.DropTable(
-                name: "Especialidades");
-
-            migrationBuilder.DropTable(
                 name: "Instituciones");
-
-            migrationBuilder.DropTable(
-                name: "Secciones");
 
             migrationBuilder.DropTable(
                 name: "CategoriaEquipos");
@@ -560,6 +580,12 @@ namespace Datos.Migrations
 
             migrationBuilder.DropTable(
                 name: "Prestatarios");
+
+            migrationBuilder.DropTable(
+                name: "Especialidades");
+
+            migrationBuilder.DropTable(
+                name: "Secciones");
         }
     }
 }

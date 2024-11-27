@@ -100,7 +100,7 @@ namespace Proyecto_TI.Controllers
             _repositorioPrestamo.Actualizar(viewModel.Prestamo);
             _repositorioPrestamo.GuardarCambios();
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Buscar(string query)

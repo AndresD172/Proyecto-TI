@@ -1,0 +1,95 @@
+﻿@model Modelos.ViewModels.ViewModelPrestatario
+
+<div class="container adjust">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2 class="titulo">Actualizar Prestatario</h2>
+    </div>
+  </div>
+  <div class="card" style="width: 100%;">
+    <div class="card-body">
+      <div class="row">
+        <form method="post" asp-action="Registrar">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <input asp-for="Prestatario.Id" hidden />
+
+            <!--Nombre-->
+
+            <div class="mt-4">
+              <label class="form-label" for="Nombre">Nombre</label>
+              <input asp-for="Prestatario.Nombre" id="Nombre" class="form-control" type="text" aria-describedby="Nombre" placeholder="Introduzca el nombre">
+            </div>
+
+            <!--Identificacion-->
+
+            <div class="mt-5">
+              <label class="form-label" for="Identificacion">Identificación</label>
+              <input asp-for="Prestatario.Identificacion" id="Identificacion" class="form-control" type="text" aria-describedby="Identificacion" placeholder="Introduzca la identificación">
+            </div>
+
+            <!--Especialidad-->
+
+            <div class="mt-5">
+              <label class="form-label" for="Especialidad">Especialidad</label>
+              <select asp-for="Prestatario.IdEspecialidad" asp-items="Model.OpcionesEspecialidades" class="form-select mb-3" name="Especialidad" id="Especialidad">
+                <option selected="" disabled="Especialidad">Seleccione una especialidad</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12">
+
+            <!--Apellido-->
+
+            <div class="mt-4">
+              <label class="form-label" for="Apellido">Apellidos</label>
+              <input id="Apellido" class="form-control" type="text" aria-describedby="Apellido" placeholder="Introduzca el apellido">
+            </div>
+
+            <!--Correo-->
+
+            <div class="mt-5">
+              <label class="form-label" for="Correo">Correo electrónico</label>
+              <input asp-for="Prestatario.Correo" id="Correo" class="form-control" type="text" aria-describedby="Correo" placeholder="Indroduzca el correo">
+            </div>
+
+            <!--Seccion-->
+
+            <div class="mt-5">
+              <label class="form-label" for="Seccion">Sección</label>
+              <select asp-for="Prestatario.IdSeccion" asp-items="Model.OpcionesSecciones" class="form-select mb-3" name="Seccion" id="Seccion">
+                <option selected="" disabled="Seccion">Seleccione una sección</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!--Ultima linea-->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <!-- Contenedor para el select, con margen a la derecha -->
+            <div class="mt-4">
+              <label class="form-label" for="tipo">Tipo de Prestatario</label>
+              <select asp-for="Prestatario.TipoPrestatario" class="form-select mb-3" name="Equipo" id="tipo">
+                <option selected="" disabled="">Seleccione un tipo</option>
+                <option value="Estudiante">Estudiante</option>
+                <option value="Funcionario">Funcionario</option>
+              </select>
+            </div>
+
+            <!-- Contenedor de los botones alineados a la derecha -->
+            <div class="d-flex botones-m">
+              <button type="submit" class="btn btn-color-editar btn-md ms-2 btn-color-editar:hover">
+                Aceptar
+              </button>
+              <a asp-controller="Prestatario" asp-action="Index">
+                <button class="btn btn-color-eliminar btn-md ms-2 btn-color-eliminar:hover">
+                  Cancelar
+                </button>
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

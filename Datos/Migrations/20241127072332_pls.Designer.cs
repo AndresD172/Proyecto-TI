@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127022152_im-panicking-rn")]
-    partial class impanickingrn
+    [Migration("20241127072332_pls")]
+    partial class pls
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -390,6 +390,9 @@ namespace Datos.Migrations
                     b.Property<int?>("PrestamoId")
                         .HasColumnType("int");
 
+                    b.Property<double>("Sancion")
+                        .HasColumnType("float");
+
                     b.Property<bool>("TipoMulta")
                         .HasColumnType("bit");
 
@@ -455,6 +458,12 @@ namespace Datos.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
+                    b.Property<int>("IdEspecialidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdSeccion")
+                        .HasColumnType("int");
+
                     b.Property<string>("Identificacion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -471,7 +480,15 @@ namespace Datos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TipoPrestatario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IdEspecialidad");
+
+                    b.HasIndex("IdSeccion");
 
                     b.ToTable("Prestatarios");
                 });
@@ -676,6 +693,25 @@ namespace Datos.Migrations
                     b.Navigation("Prestatario");
 
                     b.Navigation("Tecnico");
+                });
+
+            modelBuilder.Entity("Modelos.Prestatario", b =>
+                {
+                    b.HasOne("Modelos.Especialidad", "Especialidad")
+                        .WithMany()
+                        .HasForeignKey("IdEspecialidad")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modelos.Seccion", "Seccion")
+                        .WithMany()
+                        .HasForeignKey("IdSeccion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Especialidad");
+
+                    b.Navigation("Seccion");
                 });
 
             modelBuilder.Entity("Modelos.TipoPrestatario", b =>

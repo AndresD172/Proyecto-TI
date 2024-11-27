@@ -408,6 +408,10 @@ namespace Datos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
@@ -451,6 +455,12 @@ namespace Datos.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
+                    b.Property<int>("IdEspecialidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdSeccion")
+                        .HasColumnType("int");
+
                     b.Property<string>("Identificacion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -467,7 +477,15 @@ namespace Datos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TipoPrestatario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IdEspecialidad");
+
+                    b.HasIndex("IdSeccion");
 
                     b.ToTable("Prestatarios");
                 });
@@ -672,6 +690,25 @@ namespace Datos.Migrations
                     b.Navigation("Prestatario");
 
                     b.Navigation("Tecnico");
+                });
+
+            modelBuilder.Entity("Modelos.Prestatario", b =>
+                {
+                    b.HasOne("Modelos.Especialidad", "Especialidad")
+                        .WithMany()
+                        .HasForeignKey("IdEspecialidad")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modelos.Seccion", "Seccion")
+                        .WithMany()
+                        .HasForeignKey("IdSeccion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Especialidad");
+
+                    b.Navigation("Seccion");
                 });
 
             modelBuilder.Entity("Modelos.TipoPrestatario", b =>

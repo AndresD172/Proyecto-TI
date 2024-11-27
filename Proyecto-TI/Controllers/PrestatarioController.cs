@@ -2,23 +2,77 @@
 using Modelos;
 using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
     public class PrestatarioController : Controller
     {
-        private readonly IRepositorioPrestatario _prestatarioRepositorio;
+        private readonly IRepositorioPrestatario _repositorio;
 
         public PrestatarioController(IRepositorioPrestatario prestatarioRepositorio)
         {
-            _prestatarioRepositorio = prestatarioRepositorio;
+            _repositorio = prestatarioRepositorio;
         }
 
-        // GET: Index
         public IActionResult Index()
         {
-            IEnumerable<Prestatario> lista = _prestatarioRepositorio.ObtenerTodos();
+            IEnumerable<Prestatario> lista = _repositorio.ObtenerTodos();
             return View(lista);
+        }
+
+        public IActionResult Registrar()
+        {
+            ViewModelPrestatario viewModel = new ViewModelPrestatario
+            {
+                Prestatario = new Prestatario(),
+                OpcionesSecciones = _repositorio.ObtenerOpcionesSecciones(),
+                OpcionesEspecialidades = _repositorio.ObtenerOpcionesEspecialidades(),
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Registrar(ViewModelPrestatario viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            _repositorio.Agregar(viewModel.Prestatario);
+            _repositorio.GuardarCambios();
+
+            return View("Index");
+        }
+
+        public IActionResult Actualizar(int? id)
+        {
+            Prestatario prestatario = _repositorio.Obtener(id);
+
+            if (prestatario == null)
+            {
+                return NotFound();
+            }
+
+            ViewModelPrestatario viewModel = new ViewModelPrestatario
+            {
+                Prestatario = prestatario,
+                OpcionesSecciones = _repositorio.ObtenerOpcionesSecciones(),
+                OpcionesEspecialidades = _repositorio.ObtenerOpcionesEspecialidades()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost, AutoValidateAntiforgeryToken]
+        public IActionResult Actualizar(ViewModelPrestatario viewModel)
+        {
+            _repositorio.Actualizar(viewModel.Prestatario);
+            _repositorio.GuardarCambios();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Upsert
@@ -32,38 +86,13 @@ namespace Proyecto_TI.Controllers
             else
             {
                 // Editar prestatario existente
-                var prestatario = _prestatarioRepositorio.Obtener(id.GetValueOrDefault());
+                var prestatario = _repositorio.Obtener(id.GetValueOrDefault());
                 if (prestatario == null)
                 {
                     return NotFound();
                 }
                 return View(prestatario);
             }
-        }
-
-        // POST: Upsert
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Prestatario prestatario)
-        {
-            if (ModelState.IsValid)
-            {
-                // Nuevo registro
-                if (prestatario.Id == 0)
-                {
-                    _prestatarioRepositorio.Agregar(prestatario);
-                }
-                // Actualización
-                else
-                {
-                    _prestatarioRepositorio.Actualizar(prestatario);
-                }
-
-                _prestatarioRepositorio.GuardarCambios();
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(prestatario);
         }
 
         // GET: Eliminar
@@ -74,7 +103,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            var prestatario = _prestatarioRepositorio.Obtener(id.GetValueOrDefault());
+            var prestatario = _repositorio.Obtener(id.GetValueOrDefault());
             if (prestatario == null)
             {
                 return NotFound();
@@ -88,14 +117,14 @@ namespace Proyecto_TI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EliminarConfirmado(int id)
         {
-            var prestatario = _prestatarioRepositorio.Obtener(id);
+            var prestatario = _repositorio.Obtener(id);
             if (prestatario == null)
             {
                 return NotFound();
             }
 
-            _prestatarioRepositorio.Remover(prestatario);
-            _prestatarioRepositorio.GuardarCambios();
+            _repositorio.Remover(prestatario);
+            _repositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
         }
     }

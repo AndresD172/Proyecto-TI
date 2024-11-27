@@ -29,14 +29,17 @@ namespace Modelos
         public string Correo { get; set; }
 
         [Required]
-        public bool Estado { get; set; }
+        public string TipoPrestatario { get; set; }
 
-        public string NombreCompleto
-        {
-            get
-            {
-                return $"{Nombre} {PrimerApellido} {SegundoApellido}";
-            }
-        }
+        [ForeignKey(nameof(Seccion))]
+        public int IdSeccion { get; set; }
+        public Seccion Seccion { get; set; }
+
+        [ForeignKey(nameof(Especialidad))]
+        public int IdEspecialidad { get; set; }
+        public Especialidad Especialidad { get; set; }
+
+        [Required]
+        public bool Estado { get; set; }
     }
 }
