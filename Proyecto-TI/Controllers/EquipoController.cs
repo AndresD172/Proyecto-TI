@@ -82,6 +82,8 @@ namespace Proyecto_TI.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         //Post Eliminar
         public IActionResult Eliminar(Equipo equipo)
         {

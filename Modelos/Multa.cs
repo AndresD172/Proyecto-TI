@@ -24,10 +24,13 @@ namespace Modelos
         public string EstadoMulta { get; set; }
 
         [Required]
-        public bool TipoMulta {  get; set; }
+        public bool TipoMulta { get; set; }
 
         [Required]
-        public bool Estado {  get; set; }
+        public double Sancion { get; set; }
+
+        [Required]
+        public bool Estado { get; set; }
 
         [ForeignKey("IdPrestamo")]
         public int IdPrestamo { get; set; }

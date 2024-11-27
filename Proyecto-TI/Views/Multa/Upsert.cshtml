@@ -1,5 +1,78 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Utilidades;
+@model Modelos.ViewModels.ViewModelMulta;
 @{
 }
+@{
+    var titulo = "Crear nueva multa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container adjust">
+    <h1 class="titulo text-center mb-4">@titulo</h1>
+    <div class="card mx-auto shadow-sm col-lg-7">
+        <div class="card-body">
+            <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+                @if (Model.Multa.Id != 0)
+                {
+                    titulo = "Editar Multa";
+                    <input asp-for="Multa.Id" hidden>
+                }
+
+                <div class="mb-3">
+                    <label for="prestario" class="form-label">Préstamo</label>
+                    <select asp-for="Multa.IdPrestamo" asp-items="@Model.Prestamos" class="form-select">
+                        <option disabled selected>--Seleccione un prestatario--</option>
+                    </select>
+                    <span asp-validation-for="Multa.IdPrestamo" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="tipoMulta" class="form-label">Tipo de Multa</label>
+                        <input asp-for="Multa.TipoMulta" class="form-control" placeholder="Agregue el tipo de multa">
+                        <span asp-validation-for="Multa.TipoMulta" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="sancion" class="form-label">Sanción</label>
+                        <select asp-for="Multa.Sancion" class="form-select">
+                            <option disabled selected>Seleccione una sanción</option>
+                            <option value="1">Boleta disciplinaria</option>
+                            <option value="2">Cobro</option>
+                        </select>
+                        <span asp-validation-for="Multa.Sancion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input asp-for="Multa.Estado" class="form-control" value="Activa" readonly disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="fechaEmision" class="form-label">Fecha de emisión</label>
+                        <input asp-for="Multa.FechaCreacion" type="date" class="form-control">
+                        <span asp-validation-for=Multa.FechaCreacion class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea asp-for="Multa.Descripcion" class="form-control" rows="3" placeholder="Descripción de la falta"></textarea>
+                    <span asp-validation-for="Multa.Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="text-end">
+                    @if (Model.Multa.Id != 0)
+                    {
+                        <button type="submit" class="btn btn-color-editar btn-md ms-2 btn-color-editar:hover">Actualizar</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-color-editar btn-md ms-2 btn-color-editar:hover">Guardar</button>
+                    }
+                    <a asp-controller="Multa" asp-action="Index" class="btn btn-color-eliminar btn-md ms-2 btn-color-eliminar:hover">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

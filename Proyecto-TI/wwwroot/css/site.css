@@ -1,184 +1,319 @@
 @charset "UTF-8";
 
+@media (min-width: 768px) {
+    .cards {
+        width: 79%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .cards {
+        width: 100%;
+        margin: 20px !important;
+    }
+}
+
 body {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
 }
 
 .navbar {
-  background-color: #144B7C;
+    background-color: #144B7C;
 }
 
-.navbar .nav-item {
-  display: inline-block;
-  margin-right: 2px;
-}
+    .navbar .nav-item {
+        display: inline-block;
+        margin-right: 2px;
+    }
 
 .offcanvas-body {
-  background-color: #144B7C;
+    background-color: #144B7C;
 }
 
 .offcanvas-header {
-  background-color: #144B7C;
+    background-color: #144B7C;
 }
 
 .dropdown-menu {
-  background-color: #144B7C !important;  /* Forzamos el color de fondo */
-  border-color: transparent !important;  /* Removemos el borde */
+    background-color: #144B7C !important; /* Forzamos el color de fondo */
+    border-color: transparent !important; /* Removemos el borde */
 }
 
 .dropdown-item {
-  color: white !important;
+    color: white !important;
 }
 
-.dropdown-item:hover {
-  background-color: #0D3657 !important;
-  color: white !important;
-}
+    .dropdown-item:hover {
+        background-color: #0D3657 !important;
+        color: white !important;
+    }
 
 .navbar-toggler-icon {
-  filter: brightness(0) invert(1); /* Cambia el ícono a blanco */
+    filter: brightness(0) invert(1); /* Cambia el ícono a blanco */
 }
 
 .nav-item.custom-divider {
-  border-bottom: 2px solid white;
-  padding-bottom: 0.5rem;
+    border-bottom: 2px solid white;
+    padding-bottom: 0.5rem;
 }
 
 .footer {
-  background-color: #144B7C;
-  padding: 10px 0;
+    background-color: #144B7C;
+    padding: 10px 0;
+    .text-white
 
-  .text-white {
+{
     color: white;
-  }
-
-  .vertical-line {
-    border-left: 2px solid white;  
-    height: 20px; 
-  }
 }
 
-.btn{
-  background-color: #144B7C;
-  border-radius: 10px;
+.vertical-line {
+    border-left: 2px solid white;
+    height: 20px;
 }
 
-.adjust{
-  margin-top: 100px !important;
-  margin-bottom: 15px !important;
+}
+
+.btn {
+    background-color: #144B7C;
+    border-radius: 10px;
+}
+
+.adjust {
+    margin-top: 100px !important;
+    margin-bottom: 15px !important;
 }
 
 .search-bar {
-  display: flex;
+    display: flex;
+    .form-control
 
-  .form-control {
+{
     border-radius: 20px;
     padding-left: 15px;
     flex-grow: 1;
-  }
 }
 
-.col-2 {
-    a {
-        text-decoration: none;
-    }
-    .agregar-btn {
-        border-radius: 20px;
-        padding: 5px 15px;
-        margin-left: 10px;
-        display: flex;
-        align-items: center;
-        background-color: #1E73BE;
-        color: white;
-        .plus-icon {
-            font-size: 1.2rem;
-            margin-left: 5px;
-        }
-    }
+.agregar-btn {
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #1E73BE;
+    color: white;
+    .plus-icon
+
+{
+    font-size: 1.2rem;
+    margin-left: 5px;
 }
 
-.col-12{
-  margin-bottom: 4px;
+}
 }
 
-.header-inactivo{
-  background-color: #144B7C !important;
+.col-12 {
+    margin-bottom: 4px;
 }
 
-.header-activo{
-  background-color: #1E73BE !important;
+.header-inactivo {
+    background-color: #144B7C !important;
 }
 
-.card{
-  margin-top: 25px;
+.header-activo {
+    background-color: #1E73BE !important;
 }
 
-.card-text{
-  margin: 4px !important;
-  font-size: large !important;
+.card {
+    margin-top: 25px;
+    margin: 0px !important;
 }
 
-.btn-estado{
-  background-color: white !important;
-  border: solid;
-  border-radius: 10px !important;
+.card-text {
+    margin: 4px !important;
+    font-size: large !important;
+}
+
+.btn-estado {
+    background-color: white !important;
+    border: solid;
+    border-radius: 10px !important;
 }
 
 .footer {
-  display: flex;
-  justify-content: flex-end; /* Alinea el contenido hacia la derecha */
-  align-items: center;
-  z-index: 0;
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido hacia la derecha */
+    align-items: center;
 }
 
-.margin-l{
-  margin-right: 10px !important;
+.margin-l {
+    margin-right: 10px !important;
 }
 
-.btn-color-editar{
-  background-color: #1E73BE !important;
-  color: white !important;
-  border-radius: 25px !important;
+.btn-color-editar {
+    background-color: #1E73BE !important;
+    color: white !important;
+    border-radius: 25px !important;
 }
 
-.btn-color-eliminar{
-  background-color: white !important;
-  border: 2px solid #1E73BE !important;  /* Reduce el grosor del borde */
-  color: black !important;
-  border-radius: 25px !important;
+.btn-color-eliminar {
+    background-color: white !important;
+    border: 2px solid #1E73BE !important; /* Reduce el grosor del borde */
+    color: black !important;
+    border-radius: 25px !important;
 }
 
-.margen{
-  margin-right: 3px !important;
+.margen {
+    margin-right: 3px !important;
 }
 
-.card-footer{
-  background-color: transparent !important;
-}
-.titulo{
-  color: #144B7C;
+.card-footer {
+    background-color: transparent !important;
 }
 
-.tamano{
-  height: 150px !important;
-  width: 100% !important;
-
+.titulo {
+    color: #144B7C;
 }
 
-.botones-m{
-  margin-left: 900px !important;
+.tamano {
+    height: 150px !important;
+    width: 100% !important;
+}
+
+.botones-m {
+    margin-left: 500px !important;
 }
 
 .btn-color-editar:hover {
-  background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
+    background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
 }
 
 .btn-color-eliminar:hover {
-  background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
-  color: white !important; /* Cambia el texto a blanco */
-  border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
+    background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
+    color: white !important; /* Cambia el texto a blanco */
+    border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
 }
+
+.links {
+    text-decoration: none !important;
+}
+
+.decoracion {
+    text-decoration: none !important;
+    color: #000 !important;
+}
+
+.decoracionaceptar {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.btn-color-actualizar {
+    background-color: #1E73BE !important;
+    color: white !important;
+    border-radius: 25px !important;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+    /* Estilo para el hover del botón de editar */
+    .btn-color-actualizar:hover {
+        background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
+    }
+
+/* Estilo para el botón de eliminar */
+.btn-color-cancelar {
+    background-color: white !important;
+    border: 2px solid #1E73BE !important; /* Reduce el grosor del borde */
+    color: black !important;
+    border-radius: 25px !important;
+    transition: all 0.3s ease; /* Transición suave para color y bordes */
+}
+
+    /* Estilo para el hover del botón de eliminar */
+    .btn-color-cancelar:hover {
+        background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
+        color: white !important; /* Cambia el texto a blanco */
+        border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
+    }
+
+.margin-card {
+    margin-bottom: 100px !important;
+}
+
+.centrar {
+    justify-content: center !important;
+    align-content: center !important;
+    align-items: center !important;
+}
+
+.btn-color-aceptar {
+    background-color: #1E73BE !important;
+    color: white !important;
+    border-radius: 25px !important;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+    /* Estilo para el hover del botón de editar */
+    .btn-color-aceptar:hover {
+        background-color: #155A8A !important; /* Un color más oscuro al pasar el mouse */
+    }
+
+/* Estilo para el botón de eliminar */
+.btn-color-salir {
+    background-color: white !important;
+    border: 2px solid #1E73BE !important; /* Reduce el grosor del borde */
+    color: black !important;
+    border-radius: 15px !important;
+    transition: all 0.3s ease; /* Transición suave para color y bordes */
+}
+
+    /* Estilo para el hover del botón de eliminar */
+    .btn-color-salir:hover {
+        background-color: #b5b5b5 !important; /* Cambia el fondo al pasar el mouse */
+        color: white !important; /* Cambia el texto a blanco */
+        border-color: #155A8A !important; /* Cambia el borde a un tono más oscuro */
+    }
+
+.btn-inicio {
+    background-color: #1E73BE !important;
+    color: white !important;
+}
+
+.btn-inicio-hover:hover {
+    background-color: #175994 !important;
+    color: white !important;
+}
+
+
+.margin-nav {
+    margin-top: 150px !important;
+}
+
+
+.card-home {
+    width: 100% !important;
+}
+
+@media (min-width: 768px) {
+    .margin-nav {
+        margin-top: 250px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .m-nav {
+        margin-bottom: 100px !important;
+    }
+}
+
+/*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
 
 /*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
@@ -187,123 +322,123 @@ body {
  */
 :root,
 [data-bs-theme=light] {
-    --bs-blue: #0d6efd;
-    --bs-indigo: #6610f2;
-    --bs-purple: #6f42c1;
-    --bs-pink: #d63384;
-    --bs-red: #dc3545;
-    --bs-orange: #fd7e14;
-    --bs-yellow: #ffc107;
-    --bs-green: #198754;
-    --bs-teal: #20c997;
-    --bs-cyan: #0dcaf0;
-    --bs-black: #000;
-    --bs-white: #fff;
-    --bs-gray: #6c757d;
-    --bs-gray-dark: #343a40;
-    --bs-gray-100: #f8f9fa;
-    --bs-gray-200: #e9ecef;
-    --bs-gray-300: #dee2e6;
-    --bs-gray-400: #ced4da;
-    --bs-gray-500: #adb5bd;
-    --bs-gray-600: #6c757d;
-    --bs-gray-700: #495057;
-    --bs-gray-800: #343a40;
-    --bs-gray-900: #212529;
-    --bs-primary: #0d6efd;
-    --bs-secondary: #6c757d;
-    --bs-success: #198754;
-    --bs-info: #0dcaf0;
-    --bs-warning: #ffc107;
-    --bs-danger: #dc3545;
-    --bs-light: #f8f9fa;
-    --bs-dark: #212529;
-    --bs-primary-rgb: 13, 110, 253;
-    --bs-secondary-rgb: 108, 117, 125;
-    --bs-success-rgb: 25, 135, 84;
-    --bs-info-rgb: 13, 202, 240;
-    --bs-warning-rgb: 255, 193, 7;
-    --bs-danger-rgb: 220, 53, 69;
-    --bs-light-rgb: 248, 249, 250;
-    --bs-dark-rgb: 33, 37, 41;
-    --bs-primary-text-emphasis: #052c65;
-    --bs-secondary-text-emphasis: #2b2f32;
-    --bs-success-text-emphasis: #0a3622;
-    --bs-info-text-emphasis: #055160;
-    --bs-warning-text-emphasis: #664d03;
-    --bs-danger-text-emphasis: #58151c;
-    --bs-light-text-emphasis: #495057;
-    --bs-dark-text-emphasis: #495057;
-    --bs-primary-bg-subtle: #cfe2ff;
-    --bs-secondary-bg-subtle: #e2e3e5;
-    --bs-success-bg-subtle: #d1e7dd;
-    --bs-info-bg-subtle: #cff4fc;
-    --bs-warning-bg-subtle: #fff3cd;
-    --bs-danger-bg-subtle: #f8d7da;
-    --bs-light-bg-subtle: #fcfcfd;
-    --bs-dark-bg-subtle: #ced4da;
-    --bs-primary-border-subtle: #9ec5fe;
-    --bs-secondary-border-subtle: #c4c8cb;
-    --bs-success-border-subtle: #a3cfbb;
-    --bs-info-border-subtle: #9eeaf9;
-    --bs-warning-border-subtle: #ffe69c;
-    --bs-danger-border-subtle: #f1aeb5;
-    --bs-light-border-subtle: #e9ecef;
-    --bs-dark-border-subtle: #adb5bd;
-    --bs-white-rgb: 255, 255, 255;
-    --bs-black-rgb: 0, 0, 0;
-    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-    --bs-body-font-family: var(--bs-font-sans-serif);
-    --bs-body-font-size: 1rem;
-    --bs-body-font-weight: 400;
-    --bs-body-line-height: 1.5;
-    --bs-body-color: #212529;
-    --bs-body-color-rgb: 33, 37, 41;
-    --bs-body-bg: #fff;
-    --bs-body-bg-rgb: 255, 255, 255;
-    --bs-emphasis-color: #000;
-    --bs-emphasis-color-rgb: 0, 0, 0;
-    --bs-secondary-color: rgba(33, 37, 41, 0.75);
-    --bs-secondary-color-rgb: 33, 37, 41;
-    --bs-secondary-bg: #e9ecef;
-    --bs-secondary-bg-rgb: 233, 236, 239;
-    --bs-tertiary-color: rgba(33, 37, 41, 0.5);
-    --bs-tertiary-color-rgb: 33, 37, 41;
-    --bs-tertiary-bg: #f8f9fa;
-    --bs-tertiary-bg-rgb: 248, 249, 250;
-    --bs-heading-color: inherit;
-    --bs-link-color: #0d6efd;
-    --bs-link-color-rgb: 13, 110, 253;
-    --bs-link-decoration: underline;
-    --bs-link-hover-color: #0a58ca;
-    --bs-link-hover-color-rgb: 10, 88, 202;
-    --bs-code-color: #d63384;
-    --bs-highlight-color: #212529;
-    --bs-highlight-bg: #fff3cd;
-    --bs-border-width: 1px;
-    --bs-border-style: solid;
-    --bs-border-color: #dee2e6;
-    --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
-    --bs-border-radius: 0.375rem;
-    --bs-border-radius-sm: 0.25rem;
-    --bs-border-radius-lg: 0.5rem;
-    --bs-border-radius-xl: 1rem;
-    --bs-border-radius-xxl: 2rem;
-    --bs-border-radius-2xl: var(--bs-border-radius-xxl);
-    --bs-border-radius-pill: 50rem;
-    --bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    --bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    --bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
-    --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
-    --bs-focus-ring-width: 0.25rem;
-    --bs-focus-ring-opacity: 0.25;
-    --bs-focus-ring-color: rgba(13, 110, 253, 0.25);
-    --bs-form-valid-color: #198754;
-    --bs-form-valid-border-color: #198754;
-    --bs-form-invalid-color: #dc3545;
-    --bs-form-invalid-border-color: #dc3545;
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  --bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-primary-rgb: 13, 110, 253;
+  --bs-secondary-rgb: 108, 117, 125;
+  --bs-success-rgb: 25, 135, 84;
+  --bs-info-rgb: 13, 202, 240;
+  --bs-warning-rgb: 255, 193, 7;
+  --bs-danger-rgb: 220, 53, 69;
+  --bs-light-rgb: 248, 249, 250;
+  --bs-dark-rgb: 33, 37, 41;
+  --bs-primary-text-emphasis: #052c65;
+  --bs-secondary-text-emphasis: #2b2f32;
+  --bs-success-text-emphasis: #0a3622;
+  --bs-info-text-emphasis: #055160;
+  --bs-warning-text-emphasis: #664d03;
+  --bs-danger-text-emphasis: #58151c;
+  --bs-light-text-emphasis: #495057;
+  --bs-dark-text-emphasis: #495057;
+  --bs-primary-bg-subtle: #cfe2ff;
+  --bs-secondary-bg-subtle: #e2e3e5;
+  --bs-success-bg-subtle: #d1e7dd;
+  --bs-info-bg-subtle: #cff4fc;
+  --bs-warning-bg-subtle: #fff3cd;
+  --bs-danger-bg-subtle: #f8d7da;
+  --bs-light-bg-subtle: #fcfcfd;
+  --bs-dark-bg-subtle: #ced4da;
+  --bs-primary-border-subtle: #9ec5fe;
+  --bs-secondary-border-subtle: #c4c8cb;
+  --bs-success-border-subtle: #a3cfbb;
+  --bs-info-border-subtle: #9eeaf9;
+  --bs-warning-border-subtle: #ffe69c;
+  --bs-danger-border-subtle: #f1aeb5;
+  --bs-light-border-subtle: #e9ecef;
+  --bs-dark-border-subtle: #adb5bd;
+  --bs-white-rgb: 255, 255, 255;
+  --bs-black-rgb: 0, 0, 0;
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+  --bs-body-color: #212529;
+  --bs-body-color-rgb: 33, 37, 41;
+  --bs-body-bg: #fff;
+  --bs-body-bg-rgb: 255, 255, 255;
+  --bs-emphasis-color: #000;
+  --bs-emphasis-color-rgb: 0, 0, 0;
+  --bs-secondary-color: rgba(33, 37, 41, 0.75);
+  --bs-secondary-color-rgb: 33, 37, 41;
+  --bs-secondary-bg: #e9ecef;
+  --bs-secondary-bg-rgb: 233, 236, 239;
+  --bs-tertiary-color: rgba(33, 37, 41, 0.5);
+  --bs-tertiary-color-rgb: 33, 37, 41;
+  --bs-tertiary-bg: #f8f9fa;
+  --bs-tertiary-bg-rgb: 248, 249, 250;
+  --bs-heading-color: inherit;
+  --bs-link-color: #0d6efd;
+  --bs-link-color-rgb: 13, 110, 253;
+  --bs-link-decoration: underline;
+  --bs-link-hover-color: #0a58ca;
+  --bs-link-hover-color-rgb: 10, 88, 202;
+  --bs-code-color: #d63384;
+  --bs-highlight-color: #212529;
+  --bs-highlight-bg: #fff3cd;
+  --bs-border-width: 1px;
+  --bs-border-style: solid;
+  --bs-border-color: #dee2e6;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+  --bs-border-radius: 0.375rem;
+  --bs-border-radius-sm: 0.25rem;
+  --bs-border-radius-lg: 0.5rem;
+  --bs-border-radius-xl: 1rem;
+  --bs-border-radius-xxl: 2rem;
+  --bs-border-radius-2xl: var(--bs-border-radius-xxl);
+  --bs-border-radius-pill: 50rem;
+  --bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  --bs-focus-ring-width: 0.25rem;
+  --bs-focus-ring-opacity: 0.25;
+  --bs-focus-ring-color: rgba(13, 110, 253, 0.25);
+  --bs-form-valid-color: #198754;
+  --bs-form-valid-border-color: #198754;
+  --bs-form-invalid-color: #dc3545;
+  --bs-form-invalid-border-color: #dc3545;
 }
 
 [data-bs-theme=dark] {
@@ -7179,7 +7314,7 @@ textarea.form-control-lg {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 0;
+  z-index: 1030;
 }
 
 .sticky-top {

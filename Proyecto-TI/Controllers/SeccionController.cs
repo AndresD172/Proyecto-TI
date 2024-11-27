@@ -1,6 +1,7 @@
 ﻿using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
 using Modelos;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
@@ -17,7 +18,12 @@ namespace Proyecto_TI.Controllers
         public IActionResult Index()
         {
             IEnumerable<Seccion> lista = _seccionRepositorio.ObtenerTodos();
-            return View(lista);
+            ViewModelSeccion SeccionVM = new ViewModelSeccion
+            {
+                seccion = new Seccion(),
+                listaSecciones = lista
+            };
+            return View(SeccionVM);
         }
 
         // GET: Upsert
@@ -36,15 +42,28 @@ namespace Proyecto_TI.Controllers
                 {
                     return NotFound();
                 }
-                return View(seccion);
+                return View("Editar", seccion);
             }
         }
 
         // POST: Upsert
         [HttpPost]
+        [Route("Seccion/Upsert")]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Seccion seccion)
         {
+            var existe = _seccionRepositorio.ObtenerTodos().Any(s => s.NombreSeccion.Equals(seccion.NombreSeccion, StringComparison.OrdinalIgnoreCase) && s.IdSeccion != seccion.IdSeccion);
+
+            if (existe)
+            {
+               ModelState.AddModelError("seccion.NombreSeccion", "El nombre de la sección ya existe.");
+               var viewModel = new ViewModelSeccion
+               {
+                   seccion = seccion,
+                   listaSecciones = _seccionRepositorio.ObtenerTodos().ToList()
+               };
+                return View("Index", viewModel);
+            }
             if (ModelState.IsValid)
             {
                 // Nuevo registro
@@ -62,7 +81,16 @@ namespace Proyecto_TI.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(seccion);
+            return View("Editar", seccion);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ViewModelSeccion seccion)
+        {
+            var seccionVar = seccion.seccion;
+            Upsert(seccion);
+            return RedirectToAction("Index");
         }
 
         // GET: Eliminar
@@ -79,7 +107,7 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            return View(seccion);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Eliminar
@@ -96,6 +124,17 @@ namespace Proyecto_TI.Controllers
             _seccionRepositorio.Remover(seccion);
             _seccionRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Buscar(string query)
+        {
+            IEnumerable<Seccion> lista = _seccionRepositorio.ObtenerTodos(x => x.NombreSeccion.ToLower().Equals(query.ToLower()));
+            ViewModelSeccion seccionVM = new ViewModelSeccion
+            {
+                seccion = new Seccion(),
+                listaSecciones = lista
+            };
+            return View("Index", seccionVM);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Datos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
 using Modelos;
+using Modelos.ViewModels;
 
 namespace Proyecto_TI.Controllers
 {
@@ -16,20 +17,50 @@ namespace Proyecto_TI.Controllers
         public IActionResult Index()
         {
             IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos();
-            return View(lista);
+            ViewModelCategoriaEquipo categoriaEquipoVM = new ViewModelCategoriaEquipo
+            {
+                categoriaEquipo = new CategoriaEquipo(),
+				listaCategoriasEquipos = lista
+            };
+            return View(categoriaEquipoVM);
         }
 
         //GET UPSERT
         public IActionResult Upsert(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return View(new CategoriaEquipo());
+            }
+            else
+            {
+                var categoriaEquipo = _categoriaEquipoRepositorio.Obtener(id.GetValueOrDefault());
+                if (categoriaEquipo == null)
+                {
+                    return NotFound();
+                }
+                return View("Editar", categoriaEquipo);
+            }
         }
-
         //POST UPSERT
         [HttpPost]
+        [Route("CategoriaEquipo/Upsert")]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(CategoriaEquipo categoriaEquipo)
         {
+            var existe = _categoriaEquipoRepositorio.ObtenerTodos().Any(c => c.DescripcionEquipo.Equals(categoriaEquipo.DescripcionEquipo, StringComparison.OrdinalIgnoreCase) && c.Id != categoriaEquipo.Id);
+
+            if (existe)
+            {
+                ModelState.AddModelError("categoriaEquipo.DescripcionEquipo", "El nombre de la categoria ya existe.");
+                var viewModel = new ViewModelCategoriaEquipo
+                {
+                    categoriaEquipo = categoriaEquipo,
+                    listaCategoriasEquipos = _categoriaEquipoRepositorio.ObtenerTodos().ToList()
+                };
+                return View("Index", viewModel);
+            }
+
             if (ModelState.IsValid)
             {
                 //Nuevo
@@ -45,7 +76,16 @@ namespace Proyecto_TI.Controllers
                 _categoriaEquipoRepositorio.GuardarCambios();
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoriaEquipo);
+            return View("Editar", categoriaEquipo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ViewModelCategoriaEquipo categoriaEquipo)
+        {
+            var categoria = categoriaEquipo.categoriaEquipo;
+            Upsert(categoria);
+            return RedirectToAction("Index");
         }
 
         //GET ELIMINAR
@@ -68,6 +108,8 @@ namespace Proyecto_TI.Controllers
         }
 
         //POST ELIMINAR
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Eliminar(CategoriaEquipo categoriaEquipo)
         {
 
@@ -80,5 +122,15 @@ namespace Proyecto_TI.Controllers
             _categoriaEquipoRepositorio.GuardarCambios();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Buscar(string query) {
+            IEnumerable<CategoriaEquipo> lista = _categoriaEquipoRepositorio.ObtenerTodos(x => x.DescripcionEquipo.ToLower().Equals(query.ToLower()));
+            ViewModelCategoriaEquipo categoriaEquipoVM =new ViewModelCategoriaEquipo { 
+                categoriaEquipo=new CategoriaEquipo(),
+				listaCategoriasEquipos = lista
+            };
+            return View("Index", categoriaEquipoVM);
+        }
+
     }
 }

@@ -5,7 +5,6 @@ namespace Modelos.ViewModels
     public class ViewModelTipoPrestatario
     {
         public TipoPrestatario? TipoPrestatario { get; set; }
-
         public IEnumerable<SelectListItem>? Departamentos { get; set; }
         public IEnumerable<SelectListItem>? Especialidades { get; set; }
         public IEnumerable<SelectListItem>? Instituciones { get; set; }
