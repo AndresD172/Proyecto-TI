@@ -24,15 +24,14 @@ namespace Modelos
 
         public string Descripcion { get; set; }
 
-        [Required]
-        public string EstadoEquipo { get; set; }
+        public string? EstadoEquipo { get; set; }
 
-        [ForeignKey("IdCategoriaEquipo")]
+        [ForeignKey(nameof(CategoriaEquipo))]
         public int IdCategoriaEquipo { get; set; }
 
         public virtual CategoriaEquipo? CategoriaEquipo { get; set; }
 
-        public virtual ICollection<Prestamo> Prestamos { get; set; } = new List<Prestamo>();
+        public virtual ICollection<Prestamo>? Prestamos { get; set; } = new List<Prestamo>();
 
         public bool Estado { get; set; }
     }

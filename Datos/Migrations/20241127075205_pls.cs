@@ -274,7 +274,7 @@ namespace Datos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrimerApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SegundoApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SegundoApellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Identificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TipoPrestatario = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -1,4 +1,5 @@
 ﻿using Datos.Repositorio.IRepositorio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Modelos;
@@ -38,7 +39,7 @@ namespace Proyecto_TI.Controllers
             return View(viewModelPrestamo);
         }
 
-        [HttpPost, AutoValidateAntiforgeryToken]
+        [HttpPost, IgnoreAntiforgeryToken]
         public async Task<IActionResult> Registrar(ViewModelPrestamo viewModel)
         {
             if (!ModelState.IsValid)
@@ -52,6 +53,9 @@ namespace Proyecto_TI.Controllers
 
                 return View(viewModelPrestamo);
             }
+
+            // Establece el estado del equipo a activo.
+            viewModel.Prestamo.Estado = true;
 
             // Obtiene la lista de equipos y cambia el estado de los equipos a prestar.
             IEnumerable<Equipo> equipos = _repositorioEquipo.ObtenerTodos().Where(x => viewModel.Prestamo.Equipos.Contains(x));
@@ -72,7 +76,7 @@ namespace Proyecto_TI.Controllers
 
             _repositorioPrestamo.GuardarCambios();
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Actualizar(int? id)
@@ -84,19 +88,21 @@ namespace Proyecto_TI.Controllers
                 return NotFound();
             }
 
-            ViewModelPrestamo viewModelPrestamo = new ViewModelPrestamo
+            ViewModelPrestamo viewModel = new ViewModelPrestamo
             {
                 Prestamo = prestamo,
                 Equipos = _repositorioPrestamo.ObtenerOpcionesEquipos(),
                 Prestatarios = _repositorioPrestamo.ObtenerOpcionesPrestatarios()
             };
 
-            return View(viewModelPrestamo);
+            return View(viewModel);
         }
 
-        [HttpPost, AutoValidateAntiforgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Actualizar(ViewModelPrestamo viewModel)
         {
+            if (!ModelState.IsValid) { return View(viewModel); }
+
             _repositorioPrestamo.Actualizar(viewModel.Prestamo);
             _repositorioPrestamo.GuardarCambios();
 
@@ -105,36 +111,30 @@ namespace Proyecto_TI.Controllers
 
         public IActionResult Buscar(string query)
         {
-            IEnumerable<Prestamo> prestamos = _repositorioPrestamo.ObtenerTodos(x => x.Prestatario.Identificacion.ToLower().Equals(query.ToLower()));
-            return View("Index", prestamos);
+            IEnumerable<Prestamo> resultadosObtenidos = _repositorioPrestamo.ObtenerTodos(x => x.Prestatario.Identificacion.ToLower().Equals(query.ToLower()));
+            return View("Index", resultadosObtenidos);
         }
 
         public IActionResult Eliminar(int? id)
         {
-            if (id == null || id == 0)
+            Prestamo prestamoAEliminar = _repositorioPrestamo.Obtener(id);
+
+            if (prestamoAEliminar == null)
             {
                 return NotFound();
             }
 
-            Prestamo? prestamo = _repositorioPrestamo.Obtener(id);
+            // Obtiene la lista de equipos y cambia el estado de los equipos prestados.
+            IEnumerable<Equipo> equipos = _repositorioEquipo.ObtenerTodos().Where(x => prestamoAEliminar.Equipos.Contains(x));
 
-            if (prestamo == null)
+            foreach (Equipo equipo in equipos)
             {
-                return NotFound();
+                equipo.EstadoEquipo = "Disponible";
             }
 
-            return View(prestamo);
-        }
+            _repositorioEquipo.GuardarCambios();
 
-        [ValidateAntiForgeryToken, HttpPost]
-        public IActionResult Eliminar(Prestamo prestamo)
-        {
-            if (prestamo == null)
-            {
-                return NotFound();
-            }
-
-            _repositorioPrestamo.Remover(prestamo);
+            _repositorioPrestamo.Remover(prestamoAEliminar);
             _repositorioPrestamo.GuardarCambios();
 
             return RedirectToAction("Index");

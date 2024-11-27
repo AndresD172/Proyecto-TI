@@ -1,0 +1,61 @@
+﻿@model Modelos.ViewModels.ViewModelEquipo
+
+<div class="container adjust margin-card">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center">
+      <h2 class="titulo">Nuevo Equipos</h2>
+    </div>
+    <div class="col-md-8">
+      <form method="post" asp-action="Registrar">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label asp-for="Equipo.Descripcion" class="form-label">Descripción</label>
+                  <input asp-for="Equipo.Descripcion" type="text" class="form-control" placeholder="Agregue una descripción">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label asp-for="Equipo.Marca" class="form-label">Marca</label>
+                  <input asp-for="Equipo.Marca" type="text" class="form-control" placeholder="Agregue una marca">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label asp-for="Equipo.Modelo" class="form-label">Modelo</label>
+                  <input asp-for="Equipo.Modelo" type="text" class="form-control" placeholder="Agregue el modelo">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label asp-for="Equipo.IdCategoriaEquipo" class="form-label">Categoría</label>
+                  <select asp-for="Equipo.IdCategoriaEquipo" asp-items="@Model.OpcionesCategoriasEquipo" class="form-select">
+                    <option selected disabled>Seleccione una categoría</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label asp-for="Equipo.NumeroSerie" class="form-label">Número de serie</label>
+                  <input asp-for="Equipo.NumeroSerie" type="text" class="form-control" placeholder="Agregue un número de serie">
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <button type="submit" class="btn btn-color-editar btn-md ms-2 btn-color-editar:hover">
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <a asp-controller="Equipo" asp-action="Index">
+        <button class="btn btn-color-eliminar btn-md ms-2 btn-color-eliminar:hover">
+          Cancelar
+        </button>
+      </a>
+    </div>
+  </div>
+</div>

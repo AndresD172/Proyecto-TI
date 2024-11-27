@@ -1,103 +1,109 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Datos.Repositorio.IRepositorio;
 using Modelos;
+using Modelos.ViewModels;
+using Microsoft.Identity.Client;
 
 namespace Proyecto_TI.Controllers
 {
     public class EquipoController : Controller
     {
 
-        private readonly IRepositorioEquipo _equipoRepositorio;
+        private readonly IRepositorioEquipo _repositorio;
 
         public EquipoController(IRepositorioEquipo equipoRepositorio)
         {
-            _equipoRepositorio = equipoRepositorio;
+            _repositorio = equipoRepositorio;
         }
 
         public IActionResult Index()
         {
+            IEnumerable<Equipo> lista = _repositorio.ObtenerTodos(propiedadesAIncluir: ["CategoriaEquipo"]);
 
-            IEnumerable<Equipo> lista = _equipoRepositorio.ObtenerTodos();
-            
             return View(lista);
-
-
         }
 
-            //Get Upsert
-        public IActionResult Upsert(int? id)
+        public IActionResult Registrar()
         {
-
-            return View();
-
-        }
-
-         //Post Upsert
-          [HttpPost]
-          [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Equipo equipo)
-        {
-
-            if (ModelState.IsValid)
+            ViewModelEquipo viewModel = new ViewModelEquipo
             {
+                Equipo = new Equipo(),
+                OpcionesCategoriasEquipo = _repositorio.ObtenerOpcionesCategorias(),
+            };
 
-             //Nuevo
-                if (equipo.Id == 0)
-                {
-
-                    _equipoRepositorio.Agregar(equipo);
-
-                }
-                //Editar
-                else
-                {
-
-                    _equipoRepositorio.Actualizar(equipo);
-
-                }
-                _equipoRepositorio.GuardarCambios();
-                return RedirectToAction(nameof(Index));
-
-            }
-            return View(equipo);
+            return View(viewModel);
         }
 
-         //Get Eliminar
-        public IActionResult Eliminar(int? id)
+        [HttpPost, IgnoreAntiforgeryToken]
+        public IActionResult Registrar(ViewModelEquipo viewModel)
         {
-
-             if (id == null || id == 0)
-             {
-                return NotFound();
-             }
-
-            var obj = _equipoRepositorio.Obtener(id.GetValueOrDefault());
-
-            if(obj == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                ViewModelEquipo viewModelEquipo = new ViewModelEquipo
+                {
+                    Equipo = viewModel.Equipo,
+                    OpcionesCategoriasEquipo = _repositorio.ObtenerOpcionesCategorias()
+                };
 
+                return View(viewModelEquipo);
             }
-            return View(obj);
 
+            viewModel.Equipo.EstadoEquipo = "Disponible";
+
+            _repositorio.Agregar(viewModel.Equipo);
+            _repositorio.GuardarCambios();
+
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        //Post Eliminar
-        public IActionResult Eliminar(Equipo equipo)
+        public IActionResult Actualizar(int? id)
         {
+            Equipo equipo = _repositorio.Obtener(id);
 
             if (equipo == null)
-            { 
-                
+            {
                 return NotFound();
-
             }
-            _equipoRepositorio.Remover(equipo);
-            _equipoRepositorio.GuardarCambios();
-            return RedirectToAction(nameof(Index));
 
+            ViewModelEquipo viewModel = new ViewModelEquipo
+            {
+                Equipo = equipo,
+                OpcionesCategoriasEquipo = _repositorio.ObtenerOpcionesCategorias()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Actualizar(ViewModelEquipo viewModel)
+        {
+            if (!ModelState.IsValid) { return View(viewModel); }
+
+            _repositorio.Actualizar(viewModel.Equipo);
+            _repositorio.GuardarCambios();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Buscar(string query)
+        {
+            IEnumerable<Equipo> resultadosObtenidos = _repositorio.ObtenerTodos(x => x.Modelo.Contains(query));
+            return View("Index", resultadosObtenidos);
+        }
+
+        public IActionResult Eliminar(int? id)
+        {
+            Equipo equipo = _repositorio.Obtener(id);
+
+            if (equipo == null)
+            {
+                return NotFound();
+            }
+
+            _repositorio.Remover(equipo);
+            _repositorio.GuardarCambios();
+         
+            return RedirectToAction(nameof(Index));
         }
 
     }

@@ -15,22 +15,22 @@
             <!--Nombre-->
 
             <div class="mt-4">
-              <label class="form-label" for="Nombre">Nombre</label>
-              <input asp-for="Prestatario.Nombre" id="Nombre" class="form-control" type="text" aria-describedby="Nombre" placeholder="Introduzca el nombre">
+              <label class="form-label" asp-for="Prestatario.Nombre">Nombre</label>
+              <input asp-for="Prestatario.Nombre" class="form-control" type="text" aria-describedby="Nombre" placeholder="Introduzca el nombre">
             </div>
 
             <!--Identificacion-->
 
             <div class="mt-5">
-              <label class="form-label" for="Identificacion">Identificación</label>
-              <input asp-for="Prestatario.Identificacion" id="Identificacion" class="form-control" type="text" aria-describedby="Identificacion" placeholder="Introduzca la identificación">
+              <label class="form-label" asp-for="Prestatario.Identificacion">Identificación</label>
+              <input asp-for="Prestatario.Identificacion" class="form-control" type="text" aria-describedby="Identificacion" placeholder="Introduzca la identificación">
             </div>
 
             <!--Especialidad-->
 
             <div class="mt-5">
-              <label class="form-label" for="Especialidad">Especialidad</label>
-              <select asp-for="Prestatario.IdEspecialidad" asp-items="Model.OpcionesEspecialidades" class="form-select mb-3" name="Especialidad" id="Especialidad">
+              <label class="form-label" asp-for="Prestatario.IdEspecialidad">Especialidad</label>
+              <select asp-for="Prestatario.IdEspecialidad" asp-items="Model.OpcionesEspecialidades" class="form-select mb-3">
                 <option selected="" disabled="Especialidad">Seleccione una especialidad</option>
               </select>
             </div>
@@ -41,23 +41,23 @@
             <!--Apellido-->
 
             <div class="mt-4">
-              <label class="form-label" for="Apellido">Apellidos</label>
-              <input id="Apellido" class="form-control" type="text" aria-describedby="Apellido" placeholder="Introduzca el apellido">
+              <label class="form-label" asp-for="Prestatario.PrimerApellido">Apellidos</label>
+              <input asp-for="Prestatario.PrimerApellido" class="form-control" type="text" aria-describedby="Apellido" placeholder="Introduzca el apellido">
             </div>
 
             <!--Correo-->
 
             <div class="mt-5">
-              <label class="form-label" for="Correo">Correo electrónico</label>
-              <input asp-for="Prestatario.Correo" id="Correo" class="form-control" type="text" aria-describedby="Correo" placeholder="Indroduzca el correo">
+              <label class="form-label" asp-for="Prestatario.Correo">Correo electrónico</label>
+              <input asp-for="Prestatario.Correo" class="form-control" type="text" aria-describedby="Correo" placeholder="Indroduzca el correo">
             </div>
 
             <!--Seccion-->
 
             <div class="mt-5">
-              <label class="form-label" for="Seccion">Sección</label>
-              <select asp-for="Prestatario.IdSeccion" asp-items="Model.OpcionesSecciones" class="form-select mb-3" name="Seccion" id="Seccion">
-                <option selected="" disabled="Seccion">Seleccione una sección</option>
+              <label class="form-label" asp-for="Prestatario.IdSeccion">Sección</label>
+              <select asp-for="Prestatario.IdSeccion" asp-items="Model.OpcionesSecciones" class="form-select mb-3">
+                <option selected disabled>Seleccione una sección</option>
               </select>
             </div>
 
@@ -67,8 +67,8 @@
           <div class="col-lg-3 col-md-6 col-sm-12">
             <!-- Contenedor para el select, con margen a la derecha -->
             <div class="mt-4">
-              <label class="form-label" for="tipo">Tipo de Prestatario</label>
-              <select asp-for="Prestatario.TipoPrestatario" class="form-select mb-3" name="Equipo" id="tipo">
+              <label class="form-label" asp-for="Prestatario.TipoPrestatario">Tipo de Prestatario</label>
+              <select asp-for="Prestatario.TipoPrestatario" class="form-select mb-3">
                 <option selected="" disabled="">Seleccione un tipo</option>
                 <option value="Estudiante">Estudiante</option>
                 <option value="Funcionario">Funcionario</option>

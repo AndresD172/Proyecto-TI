@@ -19,8 +19,7 @@ namespace Modelos
         [Required]
         public string PrimerApellido { get; set; }
 
-        [Required]
-        public string SegundoApellido { get; set; }
+        public string? SegundoApellido { get; set; }
 
         [Required]
         public string Identificacion { get; set; }
@@ -33,11 +32,13 @@ namespace Modelos
 
         [ForeignKey(nameof(Seccion))]
         public int IdSeccion { get; set; }
-        public Seccion Seccion { get; set; }
+
+        public virtual Seccion? Seccion { get; set; }
 
         [ForeignKey(nameof(Especialidad))]
         public int IdEspecialidad { get; set; }
-        public Especialidad Especialidad { get; set; }
+    
+        public virtual Especialidad? Especialidad { get; set; }
 
         [Required]
         public bool Estado { get; set; }

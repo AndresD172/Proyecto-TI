@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Modelos.Prestatario>
+﻿@using Modelos
+@model IEnumerable<Modelos.Prestatario>
 
 <div class="container adjust">
   <div class="row">
@@ -11,7 +12,7 @@
           @{
             string query = null;
           }
-          <input asp-for=@(query) id="Buscar" class="form-control form-control-lg" type="text" placeholder="Buscar préstamo">
+          <input asp-for=@(query) id="Buscar" class="form-control form-control-lg" type="text" placeholder="Buscar prestatario">
           <input type="submit" style="visibility: hidden; border: 0; padding: 0; font-size: 0;" />
         </div>
       </form>
@@ -23,11 +24,17 @@
     </div>
   </div>
   <div class="row mt-5">
-    @{
-      foreach (var prestatario in Model)
-      {
-        <partial name="PartialViews/_CardPrestatario" model="prestatario" />
-      }
+    @foreach(Prestatario prestatario in Model)
+    {
+        <partial name="PartialViews/_CardPrestatario" model="new Prestatario {Id = prestatario.Id,
+                                                                 Nombre = prestatario.Nombre,
+                                                                 PrimerApellido = prestatario.PrimerApellido,
+                                                                 SegundoApellido = prestatario.SegundoApellido,
+                                                                 Identificacion = prestatario.Identificacion,
+                                                                 Correo = prestatario.Correo,
+                                                                 TipoPrestatario = prestatario.TipoPrestatario,
+                                                                 Seccion = prestatario.Seccion,
+                                                                 Especialidad = prestatario.Especialidad}" />
     }
   </div>
 </div>

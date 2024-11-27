@@ -17,7 +17,7 @@ namespace Proyecto_TI.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Prestatario> lista = _repositorio.ObtenerTodos();
+            IEnumerable<Prestatario> lista = _repositorio.ObtenerTodos(propiedadesAIncluir: ["Seccion", "Especialidad"]).ToList();
             return View(lista);
         }
 
@@ -44,7 +44,7 @@ namespace Proyecto_TI.Controllers
             _repositorio.Agregar(viewModel.Prestatario);
             _repositorio.GuardarCambios();
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Actualizar(int? id)
@@ -69,63 +69,33 @@ namespace Proyecto_TI.Controllers
         [HttpPost, AutoValidateAntiforgeryToken]
         public IActionResult Actualizar(ViewModelPrestatario viewModel)
         {
+            if (!ModelState.IsValid) { return View(viewModel); }
+
             _repositorio.Actualizar(viewModel.Prestatario);
             _repositorio.GuardarCambios();
 
             return RedirectToAction("Index");
         }
 
-        // GET: Upsert
-        public IActionResult Upsert(int? id)
+        public IActionResult Buscar(string query)
         {
-            if (id == null || id == 0)
-            {
-                // Crear nuevo prestatario
-                return View(new Prestatario());
-            }
-            else
-            {
-                // Editar prestatario existente
-                var prestatario = _repositorio.Obtener(id.GetValueOrDefault());
-                if (prestatario == null)
-                {
-                    return NotFound();
-                }
-                return View(prestatario);
-            }
+            IEnumerable<Prestatario> resultadosObtenidos = _repositorio.ObtenerTodos(x => x.Identificacion.ToLower().Equals(query.ToLower()), propiedadesAIncluir: ["Seccion", "Especialidad"]);
+            return View("Index", resultadosObtenidos);
         }
 
-        // GET: Eliminar
         public IActionResult Eliminar(int? id)
         {
-            if (id == null || id == 0)
+            Prestatario prestatarioAEliminar = _repositorio.Obtener(id);
+
+            if (prestatarioAEliminar == null)
             {
                 return NotFound();
             }
 
-            var prestatario = _repositorio.Obtener(id.GetValueOrDefault());
-            if (prestatario == null)
-            {
-                return NotFound();
-            }
-
-            return View(prestatario);
-        }
-
-        // POST: Eliminar
-        [HttpPost, ActionName("Eliminar")]
-        [ValidateAntiForgeryToken]
-        public IActionResult EliminarConfirmado(int id)
-        {
-            var prestatario = _repositorio.Obtener(id);
-            if (prestatario == null)
-            {
-                return NotFound();
-            }
-
-            _repositorio.Remover(prestatario);
+            _repositorio.Remover(prestatarioAEliminar);
             _repositorio.GuardarCambios();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction("Index");
         }
     }
 }

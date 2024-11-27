@@ -12,8 +12,8 @@ namespace Modelos.ViewModels
     {
         public Prestatario Prestatario { get; set; }
 
-        public IEnumerable<SelectListItem> OpcionesEspecialidades { get; set; }
+        public IEnumerable<SelectListItem>? OpcionesEspecialidades { get; set; }
 
-        public IEnumerable<SelectListItem> OpcionesSecciones { get; set; }
+        public IEnumerable<SelectListItem>? OpcionesSecciones { get; set; }
     }
 }
